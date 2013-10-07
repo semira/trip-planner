@@ -1,28 +1,15 @@
 == README
- 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+This is the core repository for the wikigps project.  The overall goal of this project is to create a way for a mobile user to understand what is around them and get information in a timely manner.  The initial pass at this is an integration between the standard mobile GPS integration features and Wikipedia's locations tagged by GPS location, hence the name wikigps.
 
-* Ruby version
+Application details:
+
+* ruby - 2.0.0
 
 * System dependencies
 
 * Configuration
 
-* Database creation
+* Database this project uses postgres in dev deployment scenarios.
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+* Services - currently there are no services to be managed.  This application will almost certainly be migrated to a full Procfile application for easier development.
