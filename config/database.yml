@@ -48,8 +48,8 @@ test:
   encoding: unicode
   database: wikigps_test
   pool: 5
-  username: wikigps
-  password:
+  username: <%= ENV["DEVDB_USERNAME"] %>
+  password: <%= ENV["DEVDB_PASS"] %>
 
 production:
   adapter: postgresql
