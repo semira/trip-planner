@@ -17,8 +17,8 @@
 development:
   adapter: postgresql
   encoding: unicode
-  hostname: localhost
-  database: <%= ENV["DEVDB_NAME"] %>
+  database: <%= ENV['DEVDB_NAME'] %>
+  host: localhost
   pool: 5
   username: <%= ENV["DEVDB_USERNAME"] %>
   password: <%= ENV["DEVDB_PASS"] %>
@@ -47,8 +47,8 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  hostname: localhost
   database: <%= ENV["TESTDB_NAME"] %>
+  host: localhost
   pool: 5
   username: <%= ENV["TESTDB_USERNAME"] %>
   password: <%= ENV["TESTDB_PASS"] %>
