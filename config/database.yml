@@ -47,11 +47,11 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: wikigps_test
+  database: <%= ENV["TESTDB_NAME"] %>
   host: localhost
   pool: 5
-  username: wikigps
-  password:
+  username: <%= ENV["TESTDB_USERNAME"] %>
+  password: <%= ENV["TESTDB_PASS"] %>
 
 production:
   adapter: postgresql
