@@ -1,0 +1,2 @@
+//$('.place').detach();
+$('#places-results').html("<%= escape_javascript render(:partial => 'result', :collection => @results) %>");

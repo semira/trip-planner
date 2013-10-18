@@ -1,8 +1,12 @@
 <% content_for :script do %>
 	<script>
+		var latitude;
+		var longitude;
 		function locationHandler(location) {
 			//$('#location').html ="<img src='http://maps.google.com/staticmap?center=" + location.coords.latitude + "," + location.coords.longitude + "&size=300x200&maptype=hybrid&zoom=16&key=YOURGOOGLEAPIKEY' />";
-			$('#location').html("Location: " + location.coords.longitude + ', ' + location.coords.latitude  + ' (' + location.coords.accuracy + ')');
+			longitude = location.coords.longitude;
+			latitude = location.coords.latitude;
+			$('#location').html("Location: " + longitude + ', ' + latitude  + ' (' + location.coords.accuracy + ')');
 		}
 		navigator.geolocation.getCurrentPosition(locationHandler);
 		
@@ -20,6 +24,13 @@
 			        setTimeout(function () {
 			            btn.button('reset')
 			        }, 10000);
+					var call = $.ajax({
+						url: "test_search.js",
+					 	data: { lat: latitude, long: longitude },
+						beforeSend: function() {
+						    $('.place-result').detach();
+						  }
+					})
 			    });
 		});
 	</script>
@@ -43,23 +54,7 @@
 					<div class="panel-heading">
 				    	<h3 class="panel-title">Places Nearby</h3>
 				  	</div>
-					<div class="list-group">
-						<a href="#carousel-app" class="list-group-item" data-slide-to="2">
-					    	<h4 class="list-group-item-heading">Jaya Sri Maha Bodhi</h4>
-					    	<p class="list-group-item-text">Jaya Sri Maha Bodhi (Sinhala:ජය ශ්‍රි මහා බොධිය) is a Sacred Fig tree in Anuradhapura, Sri Lanka. It is said... </p>
-					  	</a>
-						<a href="#carousel-app" class="list-group-item" data-slide-to="3">
-					    	<h4 class="list-group-item-heading">Jetavanaramaya</h4>
-					    	<p class="list-group-item-text">The Jetavanaramaya is a stupa, located in the ruins of Jetavana Monastery in the sacred world heritage city ... </p>
-					  	</a>
-						<a href="#carousel-app" class="list-group-item" data-slide-to="4">
-					    	<h4 class="list-group-item-heading">Abhayagiri vihāra</h4>
-					    	<p class="list-group-item-text">Abhayagiri Vihāra was a major monastery site of Theravada Buddhism that was situated in Anuradhapura, Sri Lanka. It is one... </p>
-					  	</a>
-						<a href="#carousel-app" class="list-group-item" data-slide-to="5">
-					    	<h4 class="list-group-item-heading">Ruwanwelisaya</h4>
-					    	<p class="list-group-item-text">The Ruwanwelisaya is a stupa in Sri Lanka, considered a marvel for its architectural qualities and sacred to many... </p>
-					  	</a>
+					<div class="list-group" id="places-results">
 					</div>
 				</div>
 			</div>		
