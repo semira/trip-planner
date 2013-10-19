@@ -1,3 +1,1 @@
-//$('.place').detach();
-$('#places-results').html("<%= escape_javascript render(:partial => 'result', :collection => @results) %>");
-//$('#places-results-item').after("<%= escape_javascript render(:partial => 'place', :collection => @places) %>")
+$('#places-results .list-group').html("<%= escape_javascript render(:partial => 'result', :collection => @results) %>");

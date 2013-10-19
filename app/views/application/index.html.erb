@@ -28,9 +28,13 @@
 						url: "test_search.js",
 					 	data: { lat: latitude, long: longitude },
 						beforeSend: function() {
-						    $('.place-result').detach();
+						    $('#places-results').removeClass('hidden');
 						  }
 					})
+					.done(function() {
+						$('.place-result').detach();
+						btn.button('reset');
+					});
 			    });
 		});
 	</script>
@@ -39,22 +43,17 @@
 <div class="container">
 	<div id="carousel-app" class="carousel slide">
 		<div class="carousel-inner">
-		
-		    <div class="item active">
-				<a href="#carousel-app" data-slide="next">
-			  		<button type="button" data-loading-text="Searching..." class="btn btn-primary btn-lg btn-block" id="find-btn">
-					Find Places Nearby
-					</button>
-				</a>
-				<small id="location" class="pull-right">Loading location...</small>
-			</div>
 
-			<div class="item" id="places-results-item">
-				<div class="panel panel-info">
-					<div class="panel-heading">
-				    	<h3 class="panel-title">Places Nearby</h3>
-				  	</div>
-					<div class="list-group" id="places-results">
+			<div class="item active" id="places-results-item">
+				<button type="button" data-loading-text="Searching..." class="btn btn-primary btn-lg btn-block" id="find-btn">
+				Find Places Nearby
+				</button>
+				<small id="location" class="pull-right">Loading location...</small>
+				
+				<br>
+				
+				<div class="panel panel-info hidden" id="places-results">
+					<div class="list-group">
 					</div>
 				</div>
 			</div>		
@@ -62,7 +61,7 @@
 		    <div class="item place">
 				<div class="panel panel-info">
 					<div class="panel-heading">	
-						<a href="#carousel-app" data-slide-to="1">Back to Results </a>						
+						<a href="#carousel-app" data-slide-to="0">Back to Results </a>						
 						<h3 class="panel-title text-center place-heading">Jaya Sri Maha Bodhi</h3>
 				  	</div>
 					<div class="panel-body">
