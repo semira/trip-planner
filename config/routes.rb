@@ -12,6 +12,7 @@ Wikigps::Application.routes.draw do
   
   # throwaway test code
   get 'test_search' => 'search#test_search'
+  get 'planner' => 'planner#index'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

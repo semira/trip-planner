@@ -1,0 +1,254 @@
+<% content_for :script do %>
+	<style>
+	/* Prevent the text contents of draggable elements from being selectable. */
+	[draggable] {
+	  -moz-user-select: none;
+	  -khtml-user-select: none;
+	  -webkit-user-select: none;
+	  user-select: none;
+	  /* Required to make elements draggable in old WebKit */
+	  -khtml-user-drag: element;
+	  -webkit-user-drag: element;
+	}
+	
+	.card {
+		height: 150px;
+		float: left;
+		position: relative;
+	}
+	
+	.day {
+		 width: 150px;
+		 border: 2px solid #666666;
+		 background-color: #ccc;
+		 margin: 3px 5px -3px;
+		 -webkit-border-radius: 10px;
+		 -ms-border-radius: 10px;
+		 -moz-border-radius: 10px;
+		 border-radius: 10px;
+		 -webkit-box-shadow: inset 0 0 3px #000;
+		 -ms-box-shadow: inset 0 0 3px #000;
+		 box-shadow: inset 0 0 3px #000;
+		 text-align: center;
+		 cursor: pointer;
+	}
+	
+	.day footer {
+		 color: #fff;
+		 text-shadow: #000 0 1px;
+		 box-shadow: 5px;
+		 padding: 10px;
+		 background: -moz-linear-gradient(left center, rgb(0,0,0), rgb(79,79,79), rgb(21,21,21));
+		 background: -webkit-gradient(linear, left top, right top,
+		                              color-stop(0, rgb(0,0,0)),
+		                              color-stop(0.50, rgb(79,79,79)),
+		                              color-stop(1, rgb(21,21,21)));
+		 background: -webkit-linear-gradient(left center, rgb(0,0,0), rgb(79,79,79), rgb(21,21,21));
+		 background: -ms-linear-gradient(left center, rgb(0,0,0), rgb(79,79,79), rgb(21,21,21));
+		 border-top: 1px solid #ddd;
+		 -webkit-border-bottom-left-radius: 10px;
+		 -moz-border-radius-bottomleft: 10px;
+		 -ms-border-radius-bottomleft: 10px;
+		 border-bottom-left-radius: 10px;
+		 -webkit-border-bottom-right-radius: 10px;
+		 -ms-border-bottom-right-radius: 10px;
+		 -moz-border-radius-bottomright: 10px;
+		 border-bottom-right-radius: 10px;
+		 height: 3em;
+		 position: absolute;
+		 bottom: 0;
+		 width: 100%;
+	}
+	
+	.inbetween {
+		width: 5px;
+	  	border-color: white;
+		background-color: blue;
+	}
+	
+	.inbetween.over {
+		width: 150px;
+		background-color: blue;
+	}
+	
+	.translucent {
+		opacity: 0.4;
+	}
+	</style>
+	
+	<script>
+		$(document).ready(function() {
+			var draggedElement = null;
+			var placeholder = null;
+			
+			//sets opacity to 40% of card upon drag start
+			function handleDragStart(e) {
+				$(this).addClass('translucent');  // this / e.target is the source node.
+
+				draggedElement = this;
+
+				e.dataTransfer.effectAllowed = 'move';
+				e.dataTransfer.setData('text/html', $(this).html());	
+			}
+			
+			function handleDragOver(e) {
+			  if (e.preventDefault) {
+			    e.preventDefault(); // Necessary. Allows us to drop.
+			  }
+
+			  e.dataTransfer.dropEffect = 'move'; 
+
+			  return false;
+			}
+
+			//sets style for area dragged over
+			function handleDragEnter(e) {
+			  // this / e.target is the current hover target.
+				//$(this).addClass('over');
+				if (this != draggedElement) {
+					placeholder=document.createElement('div');
+					$(placeholder).addClass('card inbetween over');
+					$(placeholder).insertBefore($(this));
+					return false;
+				}
+			}
+
+			//removes dragover style
+			function handleDragLeave(e) {
+			  //$(this).removeClass('over');  // this / e.target is previous target element.
+				$(placeholder).removeClass('over');
+
+			}
+			
+			function handleDrop(e) {
+			  // this / e.target is current target element.
+
+			  if (e.stopPropagation) {
+			    e.stopPropagation(); // stops the browser from redirecting.
+			  }
+			  
+			  if (this != draggedElement) {
+			  	$(draggedElement).removeClass('day');
+			  	$(draggedElement).addClass('inbetween');
+			  	$(draggedElement).html("");
+			
+				$(this).removeClass('inbetween');
+				$(this).addClass('day');
+				$(this).html(e.dataTransfer.getData('text/html'));
+				$(draggedElement).next().insertAfter($(this));
+				$(draggedElement).insertBefore($(this));
+				addDragDropListeners(this, true, false);
+			  }
+			
+			  return false;
+			}
+
+			//removes dragover style once the card is dropped
+			function handleDragEnd(e) {
+			  // this/e.target is the source node.
+
+			  var days = document.querySelectorAll('#days .inbetween');
+			  [].forEach.call(days, function (b) {
+			    //$(day).removeClass('over');
+				$(b).remove();
+				$(draggedElement).removeClass('translucent');
+			  });
+			}
+			
+			//attaches event listeners for dragging and dropping cards
+			function addDragDropListeners(element, addDrag, addDrop) {
+				if (addDrag) {
+					element.addEventListener('dragstart', handleDragStart, false);
+				}
+				if (addDrop) {
+			  		element.addEventListener('dragenter', handleDragEnter, false);
+			  		element.addEventListener('dragover', handleDragOver, false);
+					element.addEventListener('dragleave', handleDragLeave, false);
+			  		element.addEventListener('drop', handleDrop, false);
+			  		element.addEventListener('dragend', handleDragEnd, false);
+				}
+			}
+			
+			//detaches event listeners for dragging and dropping cards
+			function removeDragDropListeners(element, removeDrag, removeDrop) {
+				if (removeDrag) {
+					element.removeEventListener('dragstart', handleDragStart, false);
+			  		element.removeEventListener('dragenter', handleDragEnter, false);
+			  		element.removeEventListener('dragover', handleDragOver, false);
+				}
+				if (removeDrop) {
+			  		element.removeEventListener('dragleave', handleDragLeave, false);
+			  		element.removeEventListener('drop', handleDrop, false);
+			  		element.removeEventListener('dragend', handleDragEnd, false);
+				}
+			}
+			
+			// attach drag and drop listeners to all days currently on the page
+			var days = document.querySelectorAll('#days .day');
+			[].forEach.call(days, function(day) {
+			  addDragDropListeners(day, true, true);
+			});
+			
+			var inbtwn = document.querySelectorAll('#days .inbetween');
+			[].forEach.call(inbtwn, function(b) {
+			  addDragDropListeners(b, false, true);
+			});
+			
+			//creates a new day column upon click of Add Day button
+			$('#addDayButton')
+				.click(function() {
+					d=document.createElement('div');
+					$(d).addClass('card day')
+					    .html('<div>City</div><footer>Hotel</footer>')
+						.attr('draggable', 'true')
+						.click(function() {
+							$('#dayModal').modal('show');
+						})
+					    .appendTo($("#days")) 
+					addDragDropListeners(d);
+			})
+						
+			//brings up the edit day details modal
+			$('.day')
+				.click(function() {
+					$('#dayModal').modal('show');
+				})
+		});
+	</script>
+<% end %>
+
+<div class="modal fade" id="dayModal" tabindex="-1" role="dialog" aria-labelledby="dayModalLabel", aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<input type="text" class="form-control input-lg" placeholder="City">
+				</br>
+				<input type="text" class="form-control input-lg" placeholder="Hotel">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+ 			    <button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="days">
+  <div class="card day" draggable="true">
+	<div>Jaipur 1</div>
+	<footer>Jaipur Hotel</footer>
+  </div>
+  <div class="card day" draggable="true">
+	<div>Jaipur 2</div>
+	<footer>Jaipur Hotel</footer>
+  </div>
+  <div class="card day" draggable="true">
+	<div>Bundi</div>
+	<footer>Bundi Hotel</footer>
+  </div>
+  <div class="card day" draggable="true">
+	<div>Bundi 2</div>
+	<footer>Bundi Hotel</footer>
+  </div>
+  <button id="addDayButton">Add Day</button>
+</div>
