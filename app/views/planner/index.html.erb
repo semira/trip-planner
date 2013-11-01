@@ -9,68 +9,107 @@
 			//creates a new day column upon click of Add Day button
 			$('#addDayButton')
 				.click(function() {
- 					addDayCard();
-			})
+ 					var d = addDayCard();
+					setModalDefaultValues(d);
+					$('#dayModal').modal('show');
+			});
 						
 			//brings up the edit day details modal
 			$('.day')
 				.click(function() {
 					setModalDefaultValues(this);
 					$('#dayModal').modal('show');
-				})
+					
+				});
 				
+			//save button on modal propagates changes to the associated day details card and dismisses the modal
 			$('#saveDayDetailsButton')
-				.click(function() {
-					//var itemnum = $('#correspondingItem').attr('value');
-					//$('[data-itemnum=' + itemnum + ']').children('div.city').html($('#cityInputBox').val());												
-					//$('[data-itemnum=' + itemnum + ']').children('footer').html($('#hotelInputBox').val());												
+				.click(function() {												
 					saveDayDetails($('#correspondingItem').attr('value'));
 					$('#dayModal').modal('hide');
 					
-				})
+				});
+				
+			//removes associated day details card and dismisses modal
+			$('#deleteDayButton')
+				.click(function() {												
+					$('#dayModal').modal('hide');
+					deleteDay($('#correspondingItem').attr('value'));
+				});	
+				
 			//when day details modal is dismissed, reset textbox values in modal and assign values to day card
 			$('#dayModal').on('hidden.bs.modal', function () {
 				clearModalValues();
-			})
+			});
+			
+			//initiates the datepicker in the modal; dismisses it when date is chosen by user
+			$('#datepicker').datepicker()
+				.on('changeDate', function(ev) {
+					$('#datepicker').datepicker('hide');
+				});
 		});
 	</script>
 <% end %>
 
-<div class="modal fade" id="dayModal" tabindex="-1" role="dialog" aria-labelledby="dayModalLabel", aria-hidden="true">
+<div id="days">
+  <button id="addDayButton">Add Day</button>
+  <div class="card day" data-itemnum='1'>
+	<div class="date"></div>
+	<div class="city">Jaipur 1</div>
+	<div class="notes"><small></small></div>
+	<div class="hotel">Jaipur Hotel</div>
+  </div>
+  <div class="card day" data-itemnum='2'>
+	<div class="date"></div>
+	<div class="city">Jaipur 2</div>
+	<div class="notes"></div>
+	<div class="hotel">Jaipur Hotel</div>
+  </div>
+  <div class="card day" data-itemnum='3'>
+	<div class="date"></div>
+	<div class="city">Bundi</div>
+	<div class="notes"></div>
+	<div class="hotel">Bundi Hotel</div>
+  </div>
+  <div class="card day" data-itemnum='4'>
+	<div class="date"></div>
+	<div class="city">Bundi 2</div>
+	<div class="notes"></div>
+	<div class="hotel">Bundi Hotel</div>
+  </div>
+  <div class="card day" data-itemnum='5'>
+	<div class="date"></div>
+	<div class="city">Bundi 3</div>
+	<div class="notes"></div>
+	<div class="hotel">Bundi Hotel</div>
+  </div>
+</div>
+
+<div class="modal hide fade" id="dayModal" tabindex="-1" role="dialog" aria-labelledby="dayModalLabel", aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<form>
 			<div class="modal-body">
-				<input type="text" class="form-control input-lg" id="cityInputBox" name="city" placeholder="City">
-				</br>
-				<input type="text" class="form-control input-lg" id="hotelInputBox" placeholder="Hotel">
+				<div id="datepicker" class="input-append date" data-date="" data-date-format="dd-mm-yyyy">
+				  <input class="input-xlarge" id="dateInputBox" size="16" type="text" value="" placeholder="Date">
+				  <span class="add-on"><i class="icon-th"></i></span>
+				</div>
+				<br />
+				<input type="text" class="form-control input-xlarge" id="cityInputBox" name="city" placeholder="City">
+				<br />
+				<input type="text" class="form-control input-xlarge" id="notesInputBox" name="notes" placeholder="Notes">
+				<br />
+				<input type="text" class="form-control input-xlarge" id="hotelInputBox" placeholder="Hotel">
 				<input type="hidden" id="correspondingItem"></input>
 			</div>
 			<div class="modal-footer">
+				<button type="button" class="btn btn-danger pull-left " data-dismiss="modal" id="deleteDayButton">
+					Delete
+				</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
  			    <button type="button" class="btn btn-primary" id="saveDayDetailsButton">Save changes</button>
 			</div>
 		</form>
 		</div>
 	</div>
-</div>
-
-<div id="days">
-  <div class="card day" data-itemnum='1'>
-	<div class="city">Jaipur 1</div>
-	<footer>Jaipur Hotel</footer>
-  </div>
-  <div class="card day" data-itemnum='2'>
-	<div class="city">Jaipur 2</div>
-	<footer>Jaipur Hotel</footer>
-  </div>
-  <div class="card day" data-itemnum='3'>
-	<div class="city">Bundi</div>
-	<footer>Bundi Hotel</footer>
-  </div>
-  <div class="card day" data-itemnum='4'>
-	<div class="city">Bundi 2</div>
-	<footer>Bundi Hotel</footer>
-  </div>
-  <button id="addDayButton">Add Day</button>
 </div>

@@ -20,11 +20,10 @@
 	 cursor: pointer;
 }
 
-.day footer {
+.hotel {
 	 color: #fff;
 	 text-shadow: #000 0 1px;
 	 box-shadow: 5px;
-	 padding: 10px;
 	 background: -moz-linear-gradient(left center, rgb(0,0,0), rgb(79,79,79), rgb(21,21,21));
 	 background: -webkit-gradient(linear, left top, right top,
 	                              color-stop(0, rgb(0,0,0)),
@@ -45,4 +44,12 @@
 	 position: absolute;
 	 bottom: 0;
 	 width: 100%;
+}
+
+.datepicker {z-index: 1151 !important;}
+
+.notes {
+	text-align: left;
+	padding: 3px 5px;
+	line-height: 14px;
 }
