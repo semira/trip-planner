@@ -1,11 +1,11 @@
 .card {
-	height: 150px;
+	height: 200px;
 	float: left;
 	position: relative;
 }
 
-.day {
-	 width: 150px;
+.day-card {
+	 width: 200px;
 	 border: 2px solid #666666;
 	 background-color: #ccc;
 	 margin: 9px 5px -3px;
@@ -46,10 +46,25 @@
 	 width: 100%;
 }
 
-.datepicker {z-index: 1151 !important;}
-
 .notes {
 	text-align: left;
 	padding: 3px 5px;
 	line-height: 14px;
+}
+
+/* overrides to bootstrap-editable.css */
+
+.datepicker {z-index: 1151 !important;}
+
+.editable-input {
+	display: block !important;
+}
+
+.editable-buttons {
+	float: left;
+	margin: 3px 0px !important;
+}
+
+.editable-click, a.editable-click {
+	border-bottom: none !important;
 }

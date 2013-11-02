@@ -1,9 +1,9 @@
 //adds a day card to the end of the list of day cards with placeholder text for city and hotel
 function addDayCard() {
-	var newDayCount = parseInt($('#days .day').last().data('itemnum'))+1;
+	var newDayCount = parseInt($('#days .day-card').last().data('itemnum'))+1;
 	d=document.createElement('div');
-	$(d).addClass('card day')
-	    .html("<div class='date'></div><div class='city'>City</div><div class='notes'></div><div class='hotel'>Hotel</div>")
+	$(d).addClass('card day-card')
+	    .html("<div class='date'></div><div class='city'>City</div><div class='notes'><small></small></div><div class='hotel'>Hotel</div>")
 		.attr("data-itemnum", newDayCount)
 		.click(function() {
 			setModalDefaultValues(this);

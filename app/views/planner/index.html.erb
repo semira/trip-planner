@@ -14,20 +14,19 @@
 					$('#dayModal').modal('show');
 			});
 						
-			//brings up the edit day details modal
-			$('.day')
+			/*brings up the edit day details modal
+			$('.day-card')
 				.click(function() {
 					setModalDefaultValues(this);
 					$('#dayModal').modal('show');
 					
 				});
-				
+			*/	
 			//save button on modal propagates changes to the associated day details card and dismisses the modal
 			$('#saveDayDetailsButton')
 				.click(function() {												
 					saveDayDetails($('#correspondingItem').attr('value'));
 					$('#dayModal').modal('hide');
-					
 				});
 				
 			//removes associated day details card and dismisses modal
@@ -47,68 +46,85 @@
 				.on('changeDate', function(ev) {
 					$('#datepicker').datepicker('hide');
 				});
+				
+			//turn editability to inline mode
+			$.fn.editable.defaults.mode = 'inline';
+			
+			//turn on inline editing for card elements
+			$('#city-1').editable();
+		    
 		});
 	</script>
 <% end %>
 
 <div id="days">
   <button id="addDayButton">Add Day</button>
-  <div class="card day" data-itemnum='1'>
+  <div class="card day-card" data-itemnum='1'>
 	<div class="date"></div>
-	<div class="city">Jaipur 1</div>
+	<div class="city">
+		<p id="city-1" data-type="text" data-pk="1" data-url="" data-title="Enter username">
+			Jaipur1
+		</p></div>
 	<div class="notes"><small></small></div>
 	<div class="hotel">Jaipur Hotel</div>
   </div>
-  <div class="card day" data-itemnum='2'>
+  <div class="card day-card" data-itemnum='2'>
 	<div class="date"></div>
 	<div class="city">Jaipur 2</div>
-	<div class="notes"></div>
+	<div class="notes"><small></small></div>
 	<div class="hotel">Jaipur Hotel</div>
   </div>
-  <div class="card day" data-itemnum='3'>
+  <div class="card day-card" data-itemnum='3'>
 	<div class="date"></div>
 	<div class="city">Bundi</div>
-	<div class="notes"></div>
+	<div class="notes"><small></small></div>
 	<div class="hotel">Bundi Hotel</div>
   </div>
-  <div class="card day" data-itemnum='4'>
+  <div class="card day-card" data-itemnum='4'>
 	<div class="date"></div>
 	<div class="city">Bundi 2</div>
-	<div class="notes"></div>
+	<div class="notes"><small></small></div>
 	<div class="hotel">Bundi Hotel</div>
   </div>
-  <div class="card day" data-itemnum='5'>
+  <div class="card day-card" data-itemnum='5'>
 	<div class="date"></div>
 	<div class="city">Bundi 3</div>
-	<div class="notes"></div>
+	<div class="notes"><small></small></div>
 	<div class="hotel">Bundi Hotel</div>
   </div>
 </div>
 
-<div class="modal hide fade" id="dayModal" tabindex="-1" role="dialog" aria-labelledby="dayModalLabel", aria-hidden="true">
+<div class="modal fade" id="dayModal" tabindex="-1" role="dialog" aria-labelledby="dayModalLabel", aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<form>
 			<div class="modal-body">
-				<div id="datepicker" class="input-append date" data-date="" data-date-format="dd-mm-yyyy">
-				  <input class="input-xlarge" id="dateInputBox" size="16" type="text" value="" placeholder="Date">
-				  <span class="add-on"><i class="icon-th"></i></span>
+				<div id="datepicker" class="input-append date input-group" data-date="" data-date-format="dd-mm-yyyy">
+					<input class="form-control input-lg" id="dateInputBox" size="16" type="text" value="" placeholder="Date">
+				  	<span class="input-group-addon add-on"><i class="fa fa-calendar fa-large"></i></span>
 				</div>
+			
 				<br />
-				<input type="text" class="form-control input-xlarge" id="cityInputBox" name="city" placeholder="City">
+				<input type="text" class="form-control input-lg" id="cityInputBox" name="city" placeholder="City">
 				<br />
-				<input type="text" class="form-control input-xlarge" id="notesInputBox" name="notes" placeholder="Notes">
+				<input type="text" class="form-control input-lg" id="notesInputBox" name="notes" placeholder="Notes">
 				<br />
-				<input type="text" class="form-control input-xlarge" id="hotelInputBox" placeholder="Hotel">
+				<input type="text" class="form-control input-lg" id="hotelInputBox" placeholder="Hotel">
 				<input type="hidden" id="correspondingItem"></input>
 			</div>
+			
 			<div class="modal-footer">
-				<button type="button" class="btn btn-danger pull-left " data-dismiss="modal" id="deleteDayButton">
-					Delete
+				<button type="button" class="btn btn-danger btn-sm pull-left " data-dismiss="modal" id="deleteDayButton">
+					<i class="fa fa-trash-o fa-lg"></i> Delete
 				</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
- 			    <button type="button" class="btn btn-primary" id="saveDayDetailsButton">Save changes</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					Cancel
+				</button>
+ 			    <button type="button" class="btn btn-primary" id="saveDayDetailsButton">
+					Save
+				</button>
 			</div>
+		
 		</form>
 		</div>
 	</div>

@@ -12,10 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
+//= require bootstrap
 //= require_tree .
-//= require bootstrap-datepicker
 //= require jquery.ui.core
 //= require jquery.ui.draggable
 //= require jquery.ui.droppable
 //= require jquery.ui.sortable
+//= require bootstrap-editable

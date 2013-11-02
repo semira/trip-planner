@@ -10,7 +10,9 @@
  *
  *= require_self
  *= require_tree .
- *= require datepicker
  *= require wikiGPS
  *= require planner
+ *= require bootstrap
+ *= bootstrap-editable
+ *= require font-awesome
  */
