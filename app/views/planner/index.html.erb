@@ -63,8 +63,8 @@
 			//turn on inline editing for all cities in day cards
 			var numCards = parseInt($('#days .day-card').last().data('itemnum'));
 		    enableInlineEditing('city', numCards, {emptytext: 'City', emptyclass: 'text-muted', highlight: '#2B715C'});
-		    enableInlineEditing('notes', numCards, {emptytext: '<span class="fa fa-plus-square"></span> Add things to see & do', emptyclass: 'text-muted'});
-		    enableInlineEditing('hotel', numCards, {emptytext: 'Hotel', emptyclass: 'text-muted'});
+		    enableInlineEditing('notes', numCards, {emptytext: '<span class="fa fa-plus-square"></span> Add things to see & do', emptyclass: 'text-muted', highlight: '#2B715C'});
+		    enableInlineEditing('hotel', numCards, {emptytext: 'Hotel', emptyclass: 'text-muted', highlight: '#2B715C'});
 		});
 	</script>
 <% end %>
