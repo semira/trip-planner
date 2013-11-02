@@ -50,47 +50,94 @@
 			//turn editability to inline mode
 			$.fn.editable.defaults.mode = 'inline';
 			
-			//turn on inline editing for card elements
-			$('#city-1').editable();
-		    
+			//turn on inline editing for all cities in day cards
+			var numCards = parseInt($('#days .day-card').last().data('itemnum'));
+		    enableInlineEditing('city', numCards, {emptytext: 'City', emptyclass: 'text-muted'});
+		    enableInlineEditing('notes', numCards, {emptytext: 'Notes', emptyclass: 'text-muted'});
+		    enableInlineEditing('hotel', 1, {emptytext: 'Hotel', emptyclass: 'text-muted'});
 		});
 	</script>
 <% end %>
 
 <div id="days">
-  <button id="addDayButton">Add Day</button>
+  <button id="addDayButton" class='btn btn-info btn-lg'>Add Day</button>
+
   <div class="card day-card" data-itemnum='1'>
 	<div class="date"></div>
 	<div class="city">
-		<p id="city-1" data-type="text" data-pk="1" data-url="" data-title="Enter username">
-			Jaipur1
+		<p data-elementID="city-1" data-type="text" data-pk="1" data-url="" data-title="City">
+			
 		</p></div>
 	<div class="notes"><small></small></div>
-	<div class="hotel">Jaipur Hotel</div>
+	<div class="hotel">
+		<p data-elementID="hotel-1" data-type="text" data-pk="1" data-url="" data-title="Hotel">
+			Jaipur Hotel
+		</p>
+	</div>
   </div>
+
   <div class="card day-card" data-itemnum='2'>
 	<div class="date"></div>
-	<div class="city">Jaipur 2</div>
+	<div class="city">
+		<p data-elementID="city-2" data-type="text" data-pk="1" data-url="" data-title="City">
+			Jaipur 2
+		</p>
+	</div>
 	<div class="notes"><small></small></div>
-	<div class="hotel">Jaipur Hotel</div>
+	<div class="hotel">
+		<p data-elementID="hotel-2" data-type="text" data-pk="1" data-url="" data-title="Hotel">
+			Jaipur Hotel
+		</p>
+	</div>
   </div>
+  
   <div class="card day-card" data-itemnum='3'>
 	<div class="date"></div>
-	<div class="city">Bundi</div>
+	<div class="city">
+		<p data-elementID="city-3" data-type="text" data-pk="1" data-url="" data-title="City">
+			Bundi
+		</p>
+	</div>
 	<div class="notes"><small></small></div>
-	<div class="hotel">Bundi Hotel</div>
+	<div class="hotel">
+		<p data-elementID="hotel-3" data-type="text" data-pk="1" data-url="" data-title="Hotel">
+			Bundi Hotel
+		</p>
+	</div>
   </div>
-  <div class="card day-card" data-itemnum='4'>
+  
+<div class="card day-card" data-itemnum='4'>
 	<div class="date"></div>
-	<div class="city">Bundi 2</div>
+	<div class="city">
+		<p data-elementID="city-4" data-type="text" data-pk="1" data-url="" data-title="City">
+			Bundi
+		</p>
+	</div>
 	<div class="notes"><small></small></div>
-	<div class="hotel">Bundi Hotel</div>
+	<div class="hotel">
+		<p data-elementID="hotel-4" data-type="text" data-pk="1" data-url="" data-title="Hotel">
+			Bundi Hotel
+		</p>
+	</div>
   </div>
+  
   <div class="card day-card" data-itemnum='5'>
 	<div class="date"></div>
-	<div class="city">Bundi 3</div>
-	<div class="notes"><small></small></div>
-	<div class="hotel">Bundi Hotel</div>
+	<div class="city">
+		<p data-elementID="city-5" data-type="text" data-pk="1" data-url="" data-title="City">
+			Udaipur
+		</p>
+	</div>
+	<div class="notes">
+		<small><p data-elementID="notes-1" data-type="textarea" data-pk="1" data-url="" data-title="Notes" data-rows='4'>
+			
+		</p></small>
+	</div>
+	<div class="hotel">
+		<p data-elementID="hotel-5" data-type="text" data-pk="1" data-url="" data-title="Hotel">
+			Udaipur Hotel
+		</p>
+	</div>
   </div>
 </div>
 
@@ -107,7 +154,7 @@
 				<br />
 				<input type="text" class="form-control input-lg" id="cityInputBox" name="city" placeholder="City">
 				<br />
-				<input type="text" class="form-control input-lg" id="notesInputBox" name="notes" placeholder="Notes">
+				<textarea class="form-control input-lg" id="notesInputBox" name="notes" placeholder="Notes"></textarea>
 				<br />
 				<input type="text" class="form-control input-lg" id="hotelInputBox" placeholder="Hotel">
 				<input type="hidden" id="correspondingItem"></input>

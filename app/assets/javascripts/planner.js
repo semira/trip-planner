@@ -3,7 +3,7 @@ function addDayCard() {
 	var newDayCount = parseInt($('#days .day-card').last().data('itemnum'))+1;
 	d=document.createElement('div');
 	$(d).addClass('card day-card')
-	    .html("<div class='date'></div><div class='city'>City</div><div class='notes'><small></small></div><div class='hotel'>Hotel</div>")
+	    .html("<div class='date'></div><div class='city'></div><div class='notes'><small></small></div><div class='hotel'>Hotel</div>")
 		.attr("data-itemnum", newDayCount)
 		.click(function() {
 			setModalDefaultValues(this);
@@ -13,6 +13,7 @@ function addDayCard() {
 	return d;
 }
 
+//sets the default input values in the modal window to match the day card details, if they exist
 function setModalDefaultValues(day) {
 	//TODO: set datepicker default
 	var currentCity = $(day).children('div.city').html();
@@ -32,6 +33,7 @@ function setModalDefaultValues(day) {
 	$('#correspondingItem').val($(day).data('itemnum'));
 }
 
+//clears all values in the day details modal. to be used when the modal is dismissed so that it resets.
 function clearModalValues() {
 	$('#dateInputBox').val('');	//TODO: make this the next date in the calendar						
 	$('#cityInputBox').val('');							
@@ -40,6 +42,7 @@ function clearModalValues() {
 	$('#correspondingItem').val('');	
 }
 
+//copies the day details from the modal to the day card. to be used upon click of save button in modal.
 function saveDayDetails(itemnum) {
 	var newDate = $('#dateInputBox').val();
 	$('[data-itemnum=' + itemnum + ']').children('div.date').html(newDate);												
@@ -60,6 +63,15 @@ function saveDayDetails(itemnum) {
 	} else { $('[data-itemnum=' + itemnum + ']').children('div.hotel').html('Hotel'); }
 }
 
+//removes the associated day card from the list
 function deleteDay(itemnum) {
 	$('[data-itemnum=' + itemnum + ']').remove();
+}
+
+//turns on inline editing for all elements of a given kind, e.g. all Cities in a trip
+//editableOptions is a hash that gets passed to the editable() function for bootstrap-editable
+function enableInlineEditing(elementName, numElements, editableOptions) {
+	for (var i=1; i <= numElements; i++) {
+		$('[data-elementID=' + elementName + '-' + i + ']').editable(editableOptions);
+	}
 }
