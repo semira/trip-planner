@@ -1,15 +1,26 @@
+
+// returns the number of day cards in the trip
+function numDays () {
+	return parseInt($('#days .day-card').last().data('itemnum'));
+}
+
 //adds a day card to the end of the list of day cards with placeholder text for city and hotel
 function addDayCard() {
-	var newDayCount = parseInt($('#days .day-card').last().data('itemnum'))+1;
+	var newDayCount = numDays()+1;
+	w=document.createElement('div');
+	$(w).addClass('day-card-wrapper')
+		.html("<div class='date'></div")
+		.appendTo($("#days"));
 	d=document.createElement('div');
 	$(d).addClass('card day-card')
-	    .html("<div class='date'></div><div class='city'></div><div class='notes'><small></small></div><div class='hotel'>Hotel</div>")
+	    .html("<div class='city'></div><div class='notes'><small></small></div><div class='hotel'>Hotel</div>")
 		.attr("data-itemnum", newDayCount)
 		.click(function() {
 			setModalDefaultValues(this);
 			$('#dayModal').modal('show');
 		})
-	    .appendTo($("#days"));
+	    .appendTo($(w));
+	
 	return d;
 }
 
@@ -73,5 +84,11 @@ function deleteDay(itemnum) {
 function enableInlineEditing(elementName, numElements, editableOptions) {
 	for (var i=1; i <= numElements; i++) {
 		$('[data-elementID=' + elementName + '-' + i + ']').editable(editableOptions);
+	}
+}
+
+function updateDates(startingDay) {
+	for (var i = startingDay; i >= numDays(); i++) {
+		
 	}
 }

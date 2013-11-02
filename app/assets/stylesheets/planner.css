@@ -1,6 +1,12 @@
+
+.day-card-wrapper {
+	float: left;
+	height: 275px;
+	text-align: center;
+}
+
 .card {
 	height: 250px;
-	float: left;
 	position: relative;
 }
 
@@ -12,7 +18,6 @@
 	 -ms-border-radius: 10px;
 	 -moz-border-radius: 10px;
 	 border-radius: 10px;
-	 text-align: center;
 	 cursor: pointer;
 }
 
@@ -52,12 +57,20 @@
 	 width: 100%;
 }
 
-.city p {
-	margin-top: 3px;
+.day-date {
+	height: 25px;
+	padding-top: 13px;
+	vertical-align: bottom;
+	color: #A6623E;
+	cursor: pointer;
+}
+
+.city h4 {
+	padding-top: 5px !important;
 }
 
 .hotel p {
-	margin-top: 10px;
+	margin-top: 13px;
 }
 
 .notes {
@@ -67,7 +80,7 @@
 }
 
 #addDayButton {
-	margin-top: 9px;
+	margin-top: 34px;
 	width: 175px !important;
 	background-color: #A6623E !important;
 	border: none !important;

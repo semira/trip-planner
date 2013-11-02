@@ -46,15 +46,25 @@
 				.on('changeDate', function(ev) {
 					$('#datepicker').datepicker('hide');
 				});
+			
+			//initiates the datepicker above the first card for the start date
+			$('#startDatepicker').datepicker()
+				.on('changeDate', function(ev) {
+					var d = new Date(ev.date);
+					$('#startDate').html(d.toDateString());
+					d.setDate(d.getDate()+1);
+					$('#nextdate').html(d.toDateString());
+					$('#startDatepicker').datepicker('hide');
+			});
 				
 			//turn editability to inline mode
 			$.fn.editable.defaults.mode = 'inline';
 			
 			//turn on inline editing for all cities in day cards
 			var numCards = parseInt($('#days .day-card').last().data('itemnum'));
-		    enableInlineEditing('city', numCards, {emptytext: 'City', emptyclass: 'text-muted'});
-		    enableInlineEditing('notes', numCards, {emptytext: 'Notes', emptyclass: 'text-muted'});
-		    enableInlineEditing('hotel', 1, {emptytext: 'Hotel', emptyclass: 'text-muted'});
+		    enableInlineEditing('city', numCards, {emptytext: 'City', emptyclass: 'text-muted', highlight: '#2B715C'});
+		    enableInlineEditing('notes', numCards, {emptytext: '<span class="fa fa-plus-square"></span> Add things to see & do', emptyclass: 'text-muted'});
+		    enableInlineEditing('hotel', numCards, {emptytext: 'Hotel', emptyclass: 'text-muted'});
 		});
 	</script>
 <% end %>
@@ -62,84 +72,108 @@
 <div id="days">
   <button id="addDayButton" class='btn btn-info btn-lg'>Add Day</button>
 
-  <div class="card day-card" data-itemnum='1'>
-	<div class="date"></div>
-	<div class="city">
-		<p data-elementID="city-1" data-type="text" data-pk="1" data-url="" data-title="City">
-			
-		</p></div>
-	<div class="notes"><small></small></div>
-	<div class="hotel">
-		<p data-elementID="hotel-1" data-type="text" data-pk="1" data-url="" data-title="Hotel">
-			Jaipur Hotel
-		</p>
-	</div>
+  <div class='day-card-wrapper'>
+	  <div class="day-date" data-date-format="dd-mm-yyyy" >
+			<strong data-date="" id="startDate">
+				15/05/1984
+			</strong>
+			<span class="fa fa-calendar" id="startDatepicker" ></span>
+	  </div>
+	  <div class="card day-card" data-itemnum='1'>
+		<div class="city">
+			<h4 data-elementID="city-1" data-type="text" data-pk="1" data-url="" data-title="City">
+			</h4></div>
+		<div class="notes">
+			<small><p data-elementID="notes-1" data-type="textarea" data-pk="1" data-url="" data-title="Notes" data-rows='4'>
+			</p></small>
+		</div>
+		<div class="hotel">
+			<p data-elementID="hotel-1" data-type="text" data-pk="1" data-url="" data-title="Hotel">
+				Jaipur Hotel
+			</p>
+		</div>
+	  </div>
   </div>
 
-  <div class="card day-card" data-itemnum='2'>
-	<div class="date"></div>
-	<div class="city">
-		<p data-elementID="city-2" data-type="text" data-pk="1" data-url="" data-title="City">
-			Jaipur 2
-		</p>
-	</div>
-	<div class="notes"><small></small></div>
-	<div class="hotel">
-		<p data-elementID="hotel-2" data-type="text" data-pk="1" data-url="" data-title="Hotel">
-			Jaipur Hotel
-		</p>
-	</div>
+  <div class='day-card-wrapper'>
+	  <div class="day-date"><strong id="nextdate"></strong></div>
+	  <div class="card day-card" data-itemnum='2'>
+		<div class="city">
+			<h4 data-elementID="city-2" data-type="text" data-pk="1" data-url="" data-title="City">
+				Jaipur 2
+			</h4>
+		</div>
+		<div class="notes">
+			<small><p data-elementID="notes-2" data-type="textarea" data-pk="1" data-url="" data-title="Notes" data-rows='4'>
+			</p></small>
+		</div>
+		<div class="hotel">
+			<p data-elementID="hotel-2" data-type="text" data-pk="1" data-url="" data-title="Hotel">
+				Jaipur Hotel
+			</p>
+		</div>
+	  </div>
+  </div>
+
+  <div class='day-card-wrapper'>
+	  <div class="day-date"></div>
+	  <div class="card day-card" data-itemnum='3'>
+		<div class="city">
+			<h4 data-elementID="city-3" data-type="text" data-pk="1" data-url="" data-title="City">
+				Bundi
+			</h4>
+		</div>
+		<div class="notes">
+			<small><p data-elementID="notes-3" data-type="textarea" data-pk="1" data-url="" data-title="Notes" data-rows='4'>
+			</p></small>
+		</div>
+		<div class="hotel">
+			<p data-elementID="hotel-3" data-type="text" data-pk="1" data-url="" data-title="Hotel">
+				Bundi Hotel
+			</p>
+		</div>
+	  </div>
   </div>
   
-  <div class="card day-card" data-itemnum='3'>
-	<div class="date"></div>
-	<div class="city">
-		<p data-elementID="city-3" data-type="text" data-pk="1" data-url="" data-title="City">
-			Bundi
-		</p>
-	</div>
-	<div class="notes"><small></small></div>
-	<div class="hotel">
-		<p data-elementID="hotel-3" data-type="text" data-pk="1" data-url="" data-title="Hotel">
-			Bundi Hotel
-		</p>
+  <div class='day-card-wrapper'>  
+	  <div class="day-date"></div>
+	  <div class="card day-card" data-itemnum='4'>
+		<div class="city">
+			<h4 data-elementID="city-4" data-type="text" data-pk="1" data-url="" data-title="City">
+				Bundi
+			</h4>
+		</div>
+		<div class="notes">
+			<small><p data-elementID="notes-4" data-type="textarea" data-pk="1" data-url="" data-title="Notes" data-rows='4'>
+		</p></small></div>
+		<div class="hotel">
+			<p data-elementID="hotel-4" data-type="text" data-pk="1" data-url="" data-title="Hotel">
+				Bundi Hotel
+			</p>
+		</div>
+	  </div>
+  </div>
+
+  <div class='day-card-wrapper'>
+	  <div class="day-date"></div>
+	  <div class="card day-card" data-itemnum='5'>
+		<div class="city">
+			<h4 data-elementID="city-5" data-type="text" data-pk="1" data-url="" data-title="City">
+				Udaipur
+			</h4>
+		</div>
+		<div class="notes">
+			<small><p data-elementID="notes-5" data-type="textarea" data-pk="1" data-url="" data-title="Notes" data-rows='4'>
+			</p></small>
+		</div>
+		<div class="hotel">
+			<p data-elementID="hotel-5" data-type="text" data-pk="1" data-url="" data-title="Hotel">
+				Udaipur Hotel
+			</p>
+		</div>
+	  </div>
 	</div>
   </div>
-  
-<div class="card day-card" data-itemnum='4'>
-	<div class="date"></div>
-	<div class="city">
-		<p data-elementID="city-4" data-type="text" data-pk="1" data-url="" data-title="City">
-			Bundi
-		</p>
-	</div>
-	<div class="notes"><small></small></div>
-	<div class="hotel">
-		<p data-elementID="hotel-4" data-type="text" data-pk="1" data-url="" data-title="Hotel">
-			Bundi Hotel
-		</p>
-	</div>
-  </div>
-  
-  <div class="card day-card" data-itemnum='5'>
-	<div class="date"></div>
-	<div class="city">
-		<p data-elementID="city-5" data-type="text" data-pk="1" data-url="" data-title="City">
-			Udaipur
-		</p>
-	</div>
-	<div class="notes">
-		<small><p data-elementID="notes-1" data-type="textarea" data-pk="1" data-url="" data-title="Notes" data-rows='4'>
-			
-		</p></small>
-	</div>
-	<div class="hotel">
-		<p data-elementID="hotel-5" data-type="text" data-pk="1" data-url="" data-title="Hotel">
-			Udaipur Hotel
-		</p>
-	</div>
-  </div>
-</div>
 
 <div class="modal fade" id="dayModal" tabindex="-1" role="dialog" aria-labelledby="dayModalLabel", aria-hidden="true">
 	<div class="modal-dialog">
