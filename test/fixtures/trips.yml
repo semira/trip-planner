@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  tripname: MyString
+  startdate: 2013-11-03 16:50:29
+
+two:
+  tripname: MyString
+  startdate: 2013-11-03 16:50:29
