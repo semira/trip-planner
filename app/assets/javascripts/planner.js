@@ -9,18 +9,20 @@ function addDayCard() {
 	var newDayCount = numDays()+1;
 	w=document.createElement('div');
 	$(w).addClass('day-card-wrapper')
-		.html("<div class='date'></div")
+		.html("<div class='day-date'><strong></strong></div>")
 		.appendTo($("#days"));
 	d=document.createElement('div');
 	$(d).addClass('card day-card')
-	    .html("<div class='city'></div><div class='notes'><small></small></div><div class='hotel'>Hotel</div>")
+	    .html("<div class='city'><h4 data-elementID='city-" + newDayCount + "' data-type='text' data-pk='1' data-url='' data-title='City'></div>" 
+				+ "<div class='notes'><small><p data-elementID='notes-" + newDayCount + "' data-type='textarea' data-pk='1' data-url='' data-title='Notes' data-rows='4'></p></small></div>" 
+				+ "<div class='hotel'><p data-elementID='hotel-" + newDayCount + "' data-type='text' data-pk='1' data-url='' data-title='Hotel'></p></div>")
 		.attr("data-itemnum", newDayCount)
-		.click(function() {
-			setModalDefaultValues(this);
-			$('#dayModal').modal('show');
-		})
+//		.click(function() {
+//			setModalDefaultValues(this);
+//			$('#dayModal').modal('show');
+//		})
 	    .appendTo($(w));
-	
+	enableInlineEditingForOneDay(newDayCount);
 	return d;
 }
 
@@ -87,8 +89,22 @@ function enableInlineEditing(elementName, numElements, editableOptions) {
 	}
 }
 
+//turns on inline editing for all details of a day card, for all day cards in a trip
+function enableInlineEditingForAllDays() {
+	for (var i=1; i <= numDays(); i++) {
+		enableInlineEditingForOneDay(i);
+	}
+}
+
+//turns on inline editing for all details of a day card, for the given dayNum
+function enableInlineEditingForOneDay(dayNum) {
+	$('[data-elementID=city' + '-' + dayNum + ']').editable({emptytext: 'City', emptyclass: 'text-muted', highlight: '#2B715C'});
+	$('[data-elementID=notes' + '-' + dayNum + ']').editable({emptytext: '<span class="fa fa-plus-square"></span> Add things to see & do', emptyclass: 'text-muted', highlight: '#2B715C'});
+	$('[data-elementID=hotel' + '-' + dayNum + ']').editable({emptytext: 'Hotel', emptyclass: 'text-muted', highlight: '#2B715C'});
+}
+
 function updateDates(startingDay) {
 	for (var i = startingDay; i >= numDays(); i++) {
-		
+		$('[data-date=' + elementName + '-' + i + ']');
 	}
 }

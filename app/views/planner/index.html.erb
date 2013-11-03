@@ -2,7 +2,12 @@
 	<script>
 		$(document).ready(function() {
 			$(function() {
-			    $( "#days" ).sortable();
+			    $( "#days" ).sortable({
+				  //move the datepicker to the first day in the trip
+				  stop: function( event, ui ) {
+					$('.day-date:first').append($('#startDatepicker'));
+				  }
+				});
 			    $( "#days" ).disableSelection();
 			  });
 			
@@ -10,8 +15,8 @@
 			$('#addDayButton')
 				.click(function() {
  					var d = addDayCard();
-					setModalDefaultValues(d);
-					$('#dayModal').modal('show');
+					//setModalDefaultValues(d);
+					//$('#dayModal').modal('show');
 			});
 						
 			/*brings up the edit day details modal
@@ -53,7 +58,7 @@
 					var d = new Date(ev.date);
 					$('#startDate').html(d.toDateString());
 					d.setDate(d.getDate()+1);
-					$('#nextdate').html(d.toDateString());
+					$('#nextdate').html(d.toDateString() + ' ');
 					$('#startDatepicker').datepicker('hide');
 			});
 				
@@ -61,17 +66,14 @@
 			$.fn.editable.defaults.mode = 'inline';
 			
 			//turn on inline editing for all cities in day cards
-			var numCards = parseInt($('#days .day-card').last().data('itemnum'));
-		    enableInlineEditing('city', numCards, {emptytext: 'City', emptyclass: 'text-muted', highlight: '#2B715C'});
-		    enableInlineEditing('notes', numCards, {emptytext: '<span class="fa fa-plus-square"></span> Add things to see & do', emptyclass: 'text-muted', highlight: '#2B715C'});
-		    enableInlineEditing('hotel', numCards, {emptytext: 'Hotel', emptyclass: 'text-muted', highlight: '#2B715C'});
+			enableInlineEditingForAllDays();
 		});
 	</script>
 <% end %>
 
 <div id="days">
-  <button id="addDayButton" class='btn btn-info btn-lg'>Add Day</button>
 
+  <button id="addDayButton" class='btn btn-info btn-lg'>Add Day</button>
   <div class='day-card-wrapper'>
 	  <div class="day-date" data-date-format="dd-mm-yyyy" >
 			<strong data-date="" id="startDate">
@@ -96,7 +98,7 @@
   </div>
 
   <div class='day-card-wrapper'>
-	  <div class="day-date"><strong id="nextdate"></strong></div>
+	  <div class="day-date"><strong></strong></div>
 	  <div class="card day-card" data-itemnum='2'>
 		<div class="city">
 			<h4 data-elementID="city-2" data-type="text" data-pk="1" data-url="" data-title="City">

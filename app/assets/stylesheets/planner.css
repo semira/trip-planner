@@ -22,39 +22,30 @@
 }
 
 .hotel {
-	 color: #fff;
-	 text-shadow: #000 0 1px;
-	 box-shadow: 5px;
-	 /*background: -moz-linear-gradient(left center, rgb(0,0,0), rgb(79,79,79), rgb(21,21,21));
-	 background: -webkit-gradient(linear, left top, right top,
-	                              color-stop(0, rgb(0,0,0)),
-	                              color-stop(0.50, rgb(79,79,79)),
-	                              color-stop(1, rgb(21,21,21)));
-	 background: -webkit-linear-gradient(left center, rgb(0,0,0), rgb(79,79,79), rgb(21,21,21));
-	 background: -ms-linear-gradient(left center, rgb(0,0,0), rgb(79,79,79), rgb(21,21,21));*/
-	
+	color: #fff;
+	text-shadow: #000 0 1px;
+	box-shadow: 5px;
 	background: -moz-radial-gradient(center top, circle farthest-corner, #FFFFFF 0%, #99BDB3 10%, #6A837C 100%);
 	background: -webkit-gradient(radial, center top, 0, center top, 553, 
-								 color-stop(0, #FFFFFF), 
-								 color-stop(0.1, #99BDB3),
-								 color-stop(1, #6A837C));
+							 color-stop(0, #FFFFFF), 
+							 color-stop(0.1, #99BDB3),
+							 color-stop(1, #6A837C));
 	background: -webkit-radial-gradient(center top, circle farthest-corner, #FFFFFF 0%, #99BDB3 10%, #6A837C 100%);
 	background: -ms-radial-gradient(center top, circle farthest-corner, #FFFFFF 0%, #99BDB3 10%, #6A837C 100%);
-	
-	 /*background-color: #6A837C;*/
-	 border-top: 1px solid #2B715C;
-	 -webkit-border-bottom-left-radius: 10px;
-	 -moz-border-radius-bottomleft: 10px;
-	 -ms-border-radius-bottomleft: 10px;
-	 border-bottom-left-radius: 10px;
-	 -webkit-border-bottom-right-radius: 10px;
-	 -ms-border-bottom-right-radius: 10px;
-	 -moz-border-radius-bottomright: 10px;
-	 border-bottom-right-radius: 10px;
-	 height: 30%;
-	 position: absolute;
-	 bottom: 0;
-	 width: 100%;
+
+	border-top: 1px solid #2B715C;
+	-webkit-border-bottom-left-radius: 10px;
+	-moz-border-radius-bottomleft: 10px;
+	-ms-border-radius-bottomleft: 10px;
+	border-bottom-left-radius: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+	-ms-border-bottom-right-radius: 10px;
+	-moz-border-radius-bottomright: 10px;
+	border-bottom-right-radius: 10px;
+	height: 30%;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
 }
 
 .day-date {
@@ -101,4 +92,9 @@
 
 .editable-click, a.editable-click {
 	border-bottom: none !important;
+}
+
+div.city .text-muted, div.hotel .text-muted {
+	text-shadow: none;
+	color: #2B715C;
 }
