@@ -1,11 +1,14 @@
 <% content_for :script do %>	
 	<script>
 		$(document).ready(function() {
+			
 			$(function() {
 			    $( "#days" ).sortable({
-				  //move the datepicker to the first day in the trip
 				  stop: function( event, ui ) {
-					$('.day-date:first').append($('#startDatepicker'));
+					//if (ui.item)
+					$('.day-date:first').append($('#startDatepicker')); //move the datepicker to the first day in the trip
+					d = new Date($('#startDate').html());
+					updateDates(d, true);
 				  }
 				});
 			    $( "#days" ).disableSelection();
@@ -53,14 +56,12 @@
 				});
 			
 			//initiates the datepicker above the first card for the start date
+			//updates dates for all days in the trip when user sets the start date
 			$('#startDatepicker').datepicker()
 				.on('changeDate', function(ev) {
 					var d = new Date(ev.date);
-					$('#startDate').html(d.toDateString());
 					$('#startDatepicker').datepicker('hide');
-					updateDates(d);
-					//d.setDate(d.getDate()+1);
-					//$('#startDate').html(d.toDateString() + ' ');
+					updateDates(d, true);
 			});
 				
 			//turn editability to inline mode
