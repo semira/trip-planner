@@ -57,9 +57,10 @@
 				.on('changeDate', function(ev) {
 					var d = new Date(ev.date);
 					$('#startDate').html(d.toDateString());
-					d.setDate(d.getDate()+1);
-					$('#nextdate').html(d.toDateString() + ' ');
 					$('#startDatepicker').datepicker('hide');
+					updateDates(d);
+					//d.setDate(d.getDate()+1);
+					//$('#startDate').html(d.toDateString() + ' ');
 			});
 				
 			//turn editability to inline mode
@@ -80,9 +81,9 @@
 
   <div class='day-card-wrapper'>
 	  <div class="day-date" data-date-format="dd-mm-yyyy" >
-			<strong data-date="" id="startDate">
-				15/05/1984
-			</strong>
+			<span data-date="" id="startDate">
+				Today
+			</span>
 			<span class="fa fa-calendar" id="startDatepicker" ></span>
 	  </div>
 	  <div class="card day-card" data-itemnum='1'>
@@ -102,7 +103,7 @@
   </div>
 
   <div class='day-card-wrapper'>
-	  <div class="day-date"><strong></strong></div>
+	  <div class="day-date"><span data-date="" data-elementID='date-2'></span></div>
 	  <div class="card day-card" data-itemnum='2'>
 		<div class="city">
 			<h4 data-elementID="city-2" data-type="text" data-pk="1" data-url="" data-title="City">
@@ -122,7 +123,7 @@
   </div>
 
   <div class='day-card-wrapper'>
-	  <div class="day-date"></div>
+	  <div class="day-date"><span data-date="" data-elementID='date-3'></span></div>
 	  <div class="card day-card" data-itemnum='3'>
 		<div class="city">
 			<h4 data-elementID="city-3" data-type="text" data-pk="1" data-url="" data-title="City">
@@ -142,7 +143,7 @@
   </div>
   
   <div class='day-card-wrapper'>  
-	  <div class="day-date"></div>
+	  <div class="day-date"><span data-date="" data-elementID='date-4'></span></div>
 	  <div class="card day-card" data-itemnum='4'>
 		<div class="city">
 			<h4 data-elementID="city-4" data-type="text" data-pk="1" data-url="" data-title="City">
@@ -161,7 +162,7 @@
   </div>
 
   <div class='day-card-wrapper'>
-	  <div class="day-date"></div>
+	  <div class="day-date"><span data-date="" data-elementID='date-5'></span></div>
 	  <div class="card day-card" data-itemnum='5'>
 		<div class="city">
 			<h4 data-elementID="city-5" data-type="text" data-pk="1" data-url="" data-title="City">

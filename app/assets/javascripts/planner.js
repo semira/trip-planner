@@ -103,8 +103,15 @@ function enableInlineEditingForOneDay(dayNum) {
 	$('[data-elementID=hotel' + '-' + dayNum + ']').editable({emptytext: 'Hotel', emptyclass: 'text-muted', highlight: '#2B715C'});
 }
 
-function updateDates(startingDay) {
-	for (var i = startingDay; i >= numDays(); i++) {
-		$('[data-date=' + elementName + '-' + i + ']');
-	}
+//param: newStartDate is of type javascript Date object
+//updates all subsequent day's dates
+function updateDates(newStartDate) {
+	d = newStartDate;	
+	$('.day-date').each(function(i, date) {
+		if (i > 0) {
+			d.setDate(d.getDate()+1);
+			$(date).children('span').html(d.toDateString() + ' ');
+		}
+	});
+	
 }
