@@ -48,9 +48,9 @@
 	width: 100%;
 }
 
-.day-date {
-	height: 25px;
-	padding-top: 13px;
+.day-date-wrapper {
+	height: 20px;
+	padding-top: 5px;
 	vertical-align: bottom;
 	color: #A6623E;
 	cursor: pointer;
@@ -71,7 +71,7 @@
 }
 
 #addDayButton {
-	margin-top: 34px;
+	margin-top: 30px;
 	width: 175px !important;
 	background-color: #A6623E !important;
 	border: none !important;

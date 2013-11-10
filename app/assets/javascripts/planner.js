@@ -105,14 +105,11 @@ function enableInlineEditingForOneDay(dayNum) {
 
 //param: newStartDate is of type javascript Date object
 //updates all subsequent day's dates
-function updateDates(newStartDate, includeStartDate) {
+function updateDates(newStartDate) {
 	d = newStartDate;
-	firstToChange = includeStartDate ? 0 : 1;	
-	$('.day-date').each(function(i, date) {
-		if (i >= firstToChange) {
-			$(date).children('span').html(d.toDateString() + ' ');
-			d.setDate(d.getDate()+1);
-		}
+	$('.day-date-wrapper').each(function(i, date) {
+		$(date).children('span.day-date').html(d.toDateString() + ' ');
+		d.setDate(d.getDate()+1);
 	});
 	
 }

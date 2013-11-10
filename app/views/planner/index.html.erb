@@ -1,14 +1,23 @@
 <% content_for :script do %>	
 	<script>
 		$(document).ready(function() {
+			var startDate = null; //to keep track of the trip startDate when day cards get reordered
 			
 			$(function() {
 			    $( "#days" ).sortable({
+				  start: function( event, ui ) {
+					// remember startdate before sort in case first day gets reordered
+					startDate = new Date($('.day-date:first').html());
+				},
 				  stop: function( event, ui ) {
-					//if (ui.item)
-					$('.day-date:first').append($('#startDatepicker')); //move the datepicker to the first day in the trip
-					d = new Date($('#startDate').html());
-					updateDates(d, true);
+					if (startDate.getDate()) { //only update dates upon reorder if there is a valid startDate set
+						updateDates(startDate);
+						startDate = null; //reset the startDate so an outdated one never gets used
+					} else {
+						$('.day-date').empty();
+						$('.day-date:first').html("Today"); //move the default date to the first day in the trip
+					}
+					$('.day-date-wrapper:first').append($('#startDatepicker')); //move the datepicker to the first day in the trip
 				  }
 				});
 			    $( "#days" ).disableSelection();
@@ -56,12 +65,12 @@
 				});
 			
 			//initiates the datepicker above the first card for the start date
-			//updates dates for all days in the trip when user sets the start date
+			//when user changes trip start date, dates for all days in the trip get updated
 			$('#startDatepicker').datepicker()
 				.on('changeDate', function(ev) {
 					var d = new Date(ev.date);
 					$('#startDatepicker').datepicker('hide');
-					updateDates(d, true);
+					updateDates(d);
 			});
 				
 			//turn editability to inline mode
@@ -81,16 +90,15 @@
 <div id="days">
 
   <div class='day-card-wrapper'>
-	  <div class="day-date" data-date-format="dd-mm-yyyy" >
-			<span data-date="" id="startDate">
-				Today
-			</span>
-			<span class="fa fa-calendar" id="startDatepicker" ></span>
-	  </div>
-	  <div class="card day-card" data-itemnum='1'>
+	<div class="day-date-wrapper">
+		<span class="day-date" data-date="" data-elementID='date-1'>Today</span>
+		<span class="fa fa-calendar" id="startDatepicker" ></span>
+	</div>
+			
+	 <div class="card day-card" data-itemnum='1'>
 		<div class="city">
-			<h4 data-elementID="city-1" data-type="text" data-pk="1" data-url="" data-title="City">
-			</h4></div>
+			<h4 data-elementID="city-1" data-type="text" data-pk="1" data-url="" data-title="City"></h4>
+		</div>
 		<div class="notes">
 			<small><p data-elementID="notes-1" data-type="textarea" data-pk="1" data-url="" data-title="Notes" data-rows='4'>
 			</p></small>
@@ -100,11 +108,13 @@
 				Jaipur Hotel
 			</p>
 		</div>
-	  </div>
+	 </div>
   </div>
 
   <div class='day-card-wrapper'>
-	  <div class="day-date"><span data-date="" data-elementID='date-2'></span></div>
+	  <div class="day-date-wrapper">
+			<span class="day-date" data-date="" data-elementID='date-2'></span>
+	  </div>
 	  <div class="card day-card" data-itemnum='2'>
 		<div class="city">
 			<h4 data-elementID="city-2" data-type="text" data-pk="1" data-url="" data-title="City">
@@ -124,7 +134,9 @@
   </div>
 
   <div class='day-card-wrapper'>
-	  <div class="day-date"><span data-date="" data-elementID='date-3'></span></div>
+	  <div class="day-date-wrapper">
+			<span class="day-date"data-date="" data-elementID='date-3'></span>
+	  </div>
 	  <div class="card day-card" data-itemnum='3'>
 		<div class="city">
 			<h4 data-elementID="city-3" data-type="text" data-pk="1" data-url="" data-title="City">
@@ -144,7 +156,9 @@
   </div>
   
   <div class='day-card-wrapper'>  
-	  <div class="day-date"><span data-date="" data-elementID='date-4'></span></div>
+	  <div class="day-date-wrapper">
+			<span class="day-date" data-date="" data-elementID='date-4'></span>
+	  </div>
 	  <div class="card day-card" data-itemnum='4'>
 		<div class="city">
 			<h4 data-elementID="city-4" data-type="text" data-pk="1" data-url="" data-title="City">
@@ -163,7 +177,9 @@
   </div>
 
   <div class='day-card-wrapper'>
-	  <div class="day-date"><span data-date="" data-elementID='date-5'></span></div>
+	  <div class="day-date-wrapper">
+			<span class="day-date" data-date="" data-elementID='date-5'></span>
+	  </div>
 	  <div class="card day-card" data-itemnum='5'>
 		<div class="city">
 			<h4 data-elementID="city-5" data-type="text" data-pk="1" data-url="" data-title="City">
