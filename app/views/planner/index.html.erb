@@ -1,7 +1,7 @@
 <% content_for :script do %>	
 	<script>
 		$(document).ready(function() {
-			var startDate = null; //to keep track of the trip startDate when day cards get reordered
+			var startDate = null; //keeps track of the trip startDate when day cards get reordered
 			
 			$(function() {
 			    $( "#days" ).sortable({
@@ -10,14 +10,23 @@
 					startDate = getCurrentStartDate();
 				},
 				  stop: function( event, ui ) {
-					if (startDate) { //only update dates upon reorder if there is a valid startDate set
+					//only update dates upon reorder if there is a valid startDate set					
+					if (startDate) { 
 						updateDates(startDate);
-						startDate = null; //reset the startDate so an outdated one never gets used
-					} else {
-						$('.day-date').empty();
-						$('.day-date:first').html("Today"); //move the default date to the first day in the trip
+						
+						//reset the startDate so an outdated one never gets used
+						startDate = null; 
+					} 
+					else {
+						// startDate isn't set, so make sure nothing appears in date fields
+						$('.day-date').empty(); 
+						
+						//move the default date to the first day in the trip
+						$('.day-date:first').html("Today"); 
 					}
-					$('.day-date-wrapper:first').append($('#startDatepicker')); //move the datepicker to the first day in the trip
+					
+					//move the datepicker to the first day in the trip
+					$('.day-date-wrapper:first').append($('#startDatepicker')); 
 				  }
 				});
 			    $( "#days" ).disableSelection();
