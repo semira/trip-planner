@@ -3,6 +3,7 @@
 	float: left;
 	height: 275px;
 	text-align: center;
+	margin-top: 10px;
 }
 
 .card {
@@ -50,14 +51,14 @@
 
 .day-date-wrapper {
 	height: 20px;
-	padding-top: 5px;
+	padding-top: 10px;
 	vertical-align: bottom;
 	color: #A6623E;
 	cursor: pointer;
 }
 
 .city h4 {
-	padding-top: 5px !important;
+	padding-top: 10px !important;
 }
 
 .hotel p {
@@ -71,7 +72,7 @@
 }
 
 #addDayButton {
-	margin-top: 30px;
+	margin-top: 40px;
 	width: 175px !important;
 	background-color: #A6623E !important;
 	border: none !important;

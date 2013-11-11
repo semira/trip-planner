@@ -4,12 +4,25 @@ function numDays () {
 	return parseInt($('#days .day-card').last().data('itemnum'));
 }
 
-//adds a day card to the end of the list of day cards with placeholder text for city and hotel
+//adds a day card to the end of the list of day cards with placeholder text 
 function addDayCard() {
 	var newDayCount = numDays()+1;
+	var start = getCurrentStartDate();
+	var newDate;
+	var newDateString;
+	if (start) {
+		newDate = new Date (start);;
+		newDate.setDate(start.getDate() + newDayCount-1);
+		newDateString = newDate.toDateString();
+	} else {
+		newDateString = "";
+	}
+	
 	w=document.createElement('div');
 	$(w).addClass('day-card-wrapper')
-		.html("<div class='day-date'><strong></strong></div>")
+		.html("<div class='day-date-wrapper'><span class='day-date' data-date='' >"
+		+ newDateString
+		+ " </span></div>")		
 		.appendTo($("#days"));
 	d=document.createElement('div');
 	$(d).addClass('card day-card')
@@ -112,4 +125,11 @@ function updateDates(newStartDate) {
 		d.setDate(d.getDate()+1);
 	});
 	
+}
+
+// returns the trip's currently displayed startDate as a javascript Date object; null if no startDate set
+function getCurrentStartDate() {
+	var d = new Date($('.day-date:first').html());
+	if (d.getDate()) { return d; }
+	return null;
 }

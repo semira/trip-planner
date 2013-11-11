@@ -7,10 +7,10 @@
 			    $( "#days" ).sortable({
 				  start: function( event, ui ) {
 					// remember startdate before sort in case first day gets reordered
-					startDate = new Date($('.day-date:first').html());
+					startDate = getCurrentStartDate();
 				},
 				  stop: function( event, ui ) {
-					if (startDate.getDate()) { //only update dates upon reorder if there is a valid startDate set
+					if (startDate) { //only update dates upon reorder if there is a valid startDate set
 						updateDates(startDate);
 						startDate = null; //reset the startDate so an outdated one never gets used
 					} else {
