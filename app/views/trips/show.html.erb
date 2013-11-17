@@ -87,13 +87,22 @@
 			
 			//turn on inline editing for all cities in day cards
 			enableInlineEditingForAllDays();
-			$('#tripname').editable();
+			$('#tripname').editable({
+				type: 'text',
+				pk: 1,
+				url: '<%= trip_path @trip %>',
+				ajaxOptions: {
+					type: 'put',
+					dataType: 'json'
+				},
+				emptytext: "My Awesome Trip"
+			});
 		});
 	</script>
 <% end %>
 
 <div>
-	<h5 id="tripname">Trip Name</h5>
+	<h5 id="tripname"></h5>
 </div>
 
 <div id="days">

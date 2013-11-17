@@ -10,7 +10,6 @@
  *
  *= require_self
  *= require_tree .
- *= require wikiGPS
  *= require planner
  *= require bootstrap
  *= bootstrap-editable
