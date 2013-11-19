@@ -1,5 +1,3 @@
-class Trip < ActiveRecord::Base
-  attr_accessor :tripname, :startdate
-  
+class Trip < ActiveRecord::Base  
   has_many :days
 end
