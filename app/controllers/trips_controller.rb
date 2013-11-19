@@ -6,11 +6,19 @@ class TripsController < ApplicationController
   def new
   end
   
+  def show
+    @trip = Trip.find(params[:id])
+  end
+  
   def update
     respond_to do |format| 
-      #if @line_item.save
-        format.json 
-      #end
+      @trip = Trip.find(params[:id])
+      if @trip.update_attribute(params[:name], params[:value])
+        format.json { render json: @trip}
+        return
+      else
+        format.json { render head :no_content}
+      end
     end
   end
   
