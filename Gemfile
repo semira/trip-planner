@@ -29,6 +29,8 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 #gem "twitter-bootstrap-rails"
 gem 'font-awesome-rails'
+#gem 'bootstrap-x-editable-rails'
+gem 'bootstrap-datepicker-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'

@@ -12,6 +12,7 @@
  *= require_tree .
  *= require planner
  *= require bootstrap
- *= bootstrap-editable
+ *= require bootstrap-editable
  *= require font-awesome
+ *= require bootstrap-datepicker
  */

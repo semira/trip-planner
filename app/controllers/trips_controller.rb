@@ -14,8 +14,8 @@ class TripsController < ApplicationController
     @trip = Trip.find(params[:id])
     puts "stuff: " + params[:name] + ", " + params[:value]
     respond_to do |format| 
-      #if @trip.update_attribute(params[:name], params[:value])
-      if @trip.update_attribute(trip_params)
+      if @trip.update_attribute(params[:name], params[:value])
+      #if @trip.update_attribute(trip_params)
         format.json { render json: @trip.as_json }
       else
         format.json { render head :no_content}
@@ -24,8 +24,8 @@ class TripsController < ApplicationController
   end
   
   def trip_params
-    #params.permit(:name, :value)
-    params.require(:trip).permit(:tripname)
+    params.permit(:name, :value)
+    #params.require(:trip).permit(:tripname)
   end
   
 end

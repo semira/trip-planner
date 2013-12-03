@@ -19,3 +19,4 @@
 //= require jquery.ui.droppable
 //= require jquery.ui.sortable
 //= require bootstrap-editable
+//= require bootstrap-datepicker
