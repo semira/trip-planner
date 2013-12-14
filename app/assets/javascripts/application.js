@@ -20,3 +20,4 @@
 //= require jquery.ui.sortable
 //= require bootstrap-editable
 //= require bootstrap-datepicker
+//= require moment

@@ -12,20 +12,15 @@ class TripsController < ApplicationController
   
   def update
     @trip = Trip.find(params[:id])
-    puts "stuff: " + params[:name] + ", " + params[:value]
     respond_to do |format| 
       if @trip.update_attribute(params[:name], params[:value])
-      #if @trip.update_attribute(trip_params)
+        @fieldname = params[:name]
         format.json { render json: @trip.as_json }
+        format.js
       else
         format.json { render head :no_content}
       end
     end
-  end
-  
-  def trip_params
-    params.permit(:name, :value)
-    #params.require(:trip).permit(:tripname)
   end
   
 end

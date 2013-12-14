@@ -3,10 +3,11 @@
 		$(document).ready(function() {
 			var startDate = null; //keeps track of the trip startDate when day cards get reordered
 			
+			//enables day card reordering via drag and drop, and reorders dates as needed
 			$(function() {
 			    $( "#days" ).sortable({
 				  start: function( event, ui ) {
-					// remember startdate before sort in case first day gets reordered
+					// remember original startdate before sort in case first day gets reordered
 					startDate = getCurrentStartDate();
 				},
 				  stop: function( event, ui ) {
@@ -14,11 +15,11 @@
 					if (startDate) { 
 						updateDates(startDate);
 						
-						//reset the startDate so an outdated one never gets used
+						//reset the startDate variable so an outdated one never gets used
 						startDate = null; 
 					} 
 					else {
-						// startDate isn't set, so make sure nothing appears in date fields
+						// in this case, startDate var isn't set, so make sure nothing appears in date fields
 						$('.day-date').empty(); 
 						
 						//move the default date to the first day in the trip
@@ -40,14 +41,15 @@
 					//$('#dayModal').modal('show');
 			});
 						
-			/*brings up the edit day details modal
+			/*********** deprecated: day details modal ****************
+			//brings up the edit day details modal
 			$('.day-card')
 				.click(function() {
 					setModalDefaultValues(this);
 					$('#dayModal').modal('show');
 					
 				});
-			*/	
+				
 			//save button on modal propagates changes to the associated day details card and dismisses the modal
 			$('#saveDayDetailsButton')
 				.click(function() {												
@@ -67,11 +69,13 @@
 				clearModalValues();
 			});
 			
+			
 			//initiates the datepicker in the modal; dismisses it when date is chosen by user
 			$('#datepicker').datepicker()
 				.on('changeDate', function(ev) {
 					$('#datepicker').datepicker('hide');
 				});
+			*/
 			
 			//initiates the datepicker above the first card for the start date
 			//when user changes trip start date, dates for all days in the trip get updated
@@ -80,6 +84,12 @@
 					var d = new Date(ev.date);
 					$('#startDatepicker').datepicker('hide');
 					updateDates(d);
+					//send request to update startdate of trip
+					$.ajax({
+						url: '<%= trip_path @trip %>',
+						type: 'put',
+						data: { 'name' : 'startdate', 'value' : ev.date }
+					});
 			});
 				
 			//turn editability to inline mode
@@ -87,6 +97,8 @@
 			
 			//turn on inline editing for all cities in day cards
 			enableInlineEditingForAllDays();
+
+			//turn on inline editing for trip name
 			$('#tripname').editable({
 				type: 'text',
 				pk: 1,
@@ -110,7 +122,7 @@
 
   <div class='day-card-wrapper'>
 	<div class="day-date-wrapper">
-		<span class="day-date" data-date="" data-elementID='date-1'>Today</span>
+		<span class="day-date" data-date="" data-elementID='date-1'><%= @trip.startdate.to_formatted_s(:day_then_date) || 'Today' %></span>
 		<span class="fa fa-calendar" id="startDatepicker" ></span>
 	</div>
 			

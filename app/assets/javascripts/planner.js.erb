@@ -1,5 +1,5 @@
 
-// returns the number of day cards in the trip
+// returns the number of day cards currently in the trip
 function numDays () {
 	return parseInt($('#days .day-card').last().data('itemnum'));
 }
@@ -29,6 +29,61 @@ function addDayCard() {
 	return d;
 }
 
+//turns on inline editing for all elements of a given kind, e.g. all Cities in a trip
+//editableOptions is a hash that gets passed to the editable() function for bootstrap-editable
+function enableInlineEditing(elementName, numElements, editableOptions) {
+	for (var i=1; i <= numElements; i++) {
+		$('[data-elementID=' + elementName + '-' + i + ']').editable(editableOptions);
+	}
+}
+
+//turns on inline editing for all details of a day card, for all day cards in a trip
+function enableInlineEditingForAllDays() {
+	for (var i=1; i <= numDays(); i++) {
+		enableInlineEditingForOneDay(i);
+	}
+}
+
+//turns on inline editing for all details of a day card, for the given dayNum
+function enableInlineEditingForOneDay(dayNum) {
+	$('[data-elementID=city' + '-' + dayNum + ']').editable({emptytext: 'City', emptyclass: 'text-muted', highlight: '#2B715C'});
+	$('[data-elementID=notes' + '-' + dayNum + ']').editable({emptytext: '<span class="fa fa-plus-square"></span> Add things to see & do', emptyclass: 'text-muted', highlight: '#2B715C'});
+	$('[data-elementID=hotel' + '-' + dayNum + ']').editable({emptytext: 'Hotel', emptyclass: 'text-muted', highlight: '#2B715C'});
+}
+
+//updates all subsequent day's dates
+//uses moment.js for formatting and incrementing dates
+//param newStartDate is of type javascript Date object
+function updateDates(newStartDate) {
+	var d = moment(newStartDate);
+	$('.day-date-wrapper').each(function(i, date) {
+		$(date).children('span.day-date').html(d.format('dddd') + ' ');
+		d.add('days', 1);
+	});	
+}
+
+// returns the trip's currently displayed startDate as a javascript Date object; null if no startDate set
+function getCurrentStartDate() {
+	var d = new Date($('.day-date:first').html());
+	if (d.getDate()) { return d; }
+	return null;
+}
+
+//returns a date string for the next date in the trip, or empty string if start date hasn't yet been set
+function getNewDateString() {
+	var start = getCurrentStartDate();
+	var newDate;
+	var newDateString;
+	
+	if (start) {
+		newDate = new Date (start);
+		newDate.setDate(start.getDate() + numDays());
+		return newDate.toDateString();
+	} 
+	return ""	
+}
+
+// *****************deprecated - modal************************
 //sets the default input values in the modal window to match the day card details, if they exist
 function setModalDefaultValues(day) {
 	//TODO: set datepicker default
@@ -82,57 +137,4 @@ function saveDayDetails(itemnum) {
 //removes the associated day card from the list
 function deleteDay(itemnum) {
 	$('[data-itemnum=' + itemnum + ']').remove();
-}
-
-//turns on inline editing for all elements of a given kind, e.g. all Cities in a trip
-//editableOptions is a hash that gets passed to the editable() function for bootstrap-editable
-function enableInlineEditing(elementName, numElements, editableOptions) {
-	for (var i=1; i <= numElements; i++) {
-		$('[data-elementID=' + elementName + '-' + i + ']').editable(editableOptions);
-	}
-}
-
-//turns on inline editing for all details of a day card, for all day cards in a trip
-function enableInlineEditingForAllDays() {
-	for (var i=1; i <= numDays(); i++) {
-		enableInlineEditingForOneDay(i);
-	}
-}
-
-//turns on inline editing for all details of a day card, for the given dayNum
-function enableInlineEditingForOneDay(dayNum) {
-	$('[data-elementID=city' + '-' + dayNum + ']').editable({emptytext: 'City', emptyclass: 'text-muted', highlight: '#2B715C'});
-	$('[data-elementID=notes' + '-' + dayNum + ']').editable({emptytext: '<span class="fa fa-plus-square"></span> Add things to see & do', emptyclass: 'text-muted', highlight: '#2B715C'});
-	$('[data-elementID=hotel' + '-' + dayNum + ']').editable({emptytext: 'Hotel', emptyclass: 'text-muted', highlight: '#2B715C'});
-}
-
-//param: newStartDate is of type javascript Date object
-//updates all subsequent day's dates
-function updateDates(newStartDate) {
-	d = newStartDate;
-	$('.day-date-wrapper').each(function(i, date) {
-		$(date).children('span.day-date').html(d.toDateString() + ' ');
-		d.setDate(d.getDate()+1);
-	});	
-}
-
-// returns the trip's currently displayed startDate as a javascript Date object; null if no startDate set
-function getCurrentStartDate() {
-	var d = new Date($('.day-date:first').html());
-	if (d.getDate()) { return d; }
-	return null;
-}
-
-//returns a date string for the next date in the trip, or empty string if start date hasn't yet been set
-function getNewDateString() {
-	var start = getCurrentStartDate();
-	var newDate;
-	var newDateString;
-	
-	if (start) {
-		newDate = new Date (start);
-		newDate.setDate(start.getDate() + numDays());
-		return newDate.toDateString();
-	} 
-	return ""	
 }
