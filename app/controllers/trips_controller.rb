@@ -16,9 +16,8 @@ class TripsController < ApplicationController
       if @trip.update_attribute(params[:name], params[:value])
         @fieldname = params[:name]
         format.json { render json: @trip.as_json }
-        format.js
       else
-        format.json { render head :no_content}
+        format.json { render head :no_content} #TO DO - do something real here
       end
     end
   end
