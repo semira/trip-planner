@@ -55,11 +55,16 @@ function enableInlineEditingForOneDay(dayNum) {
 //uses moment.js for formatting and incrementing dates
 //param newStartDate is of type javascript Date object
 function updateDates(newStartDate) {
-	var d = moment(newStartDate);
-	$('.day-date-wrapper').each(function(i, date) {
-		$(date).children('span.day-date').html(d.format('dddd') + ' ');
-		d.add('days', 1);
-	});	
+	if (newStartDate) {
+		var d = moment(newStartDate);
+		$('.day-date-wrapper').each(function(i, date) {
+			$(date).children('span.day-date').html(d.format('ddd, D MMM YYYY') + ' ');
+			d.add('days', 1);
+		});	
+	}
+	else {
+		$('.day-date:first').html('Today');
+	}
 }
 
 // returns the trip's currently displayed startDate as a javascript Date object; null if no startDate set
