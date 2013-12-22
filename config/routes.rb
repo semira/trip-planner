@@ -12,6 +12,7 @@ Wikigps::Application.routes.draw do
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   resources :trips
+  resources :days
 
   # Example resource route with options:
   #   resources :products do

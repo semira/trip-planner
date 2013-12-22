@@ -46,9 +46,45 @@ function enableInlineEditingForAllDays() {
 
 //turns on inline editing for all details of a day card, for the given dayNum
 function enableInlineEditingForOneDay(dayNum) {
-	$('[data-elementID=city' + '-' + dayNum + ']').editable({emptytext: 'City', emptyclass: 'text-muted', highlight: '#2B715C'});
-	$('[data-elementID=notes' + '-' + dayNum + ']').editable({emptytext: '<span class="fa fa-plus-square"></span> Add things to see & do', emptyclass: 'text-muted', highlight: '#2B715C'});
-	$('[data-elementID=hotel' + '-' + dayNum + ']').editable({emptytext: 'Hotel', emptyclass: 'text-muted', highlight: '#2B715C'});
+	$('[data-elementID=city' + '-' + dayNum + ']').editable({
+		type: 'text',
+		name: 'city',
+		pk: dayNum,
+		url: '/days/1',
+		ajaxOptions: {
+			type: 'put',
+			dataType: 'json',
+		},
+		emptytext: 'City', 
+		emptyclass: 'text-muted', 
+		highlight: '#2B715C'
+	});
+	$('[data-elementID=notes' + '-' + dayNum + ']').editable({
+		type: 'textarea',
+		name: 'notes',
+		pk: dayNum,
+		url: '/days/1',
+		ajaxOptions: {
+			type: 'put',
+			dataType: 'json',
+		},
+		emptytext: '<span class="fa fa-plus-square"></span> Add things to see & do', 
+		emptyclass: 'text-muted', 
+		highlight: '#2B715C'
+	});
+	$('[data-elementID=hotel' + '-' + dayNum + ']').editable({
+		type: 'text',
+		name: 'hotel',
+		pk: dayNum,
+		url: '/days/1',
+		ajaxOptions: {
+			type: 'put',
+			dataType: 'json',
+		},
+		emptytext: 'Hotel', 
+		emptyclass: 'text-muted', 
+		highlight: '#2B715C'
+	});
 }
 
 //updates all subsequent day's dates

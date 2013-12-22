@@ -49,6 +49,7 @@
 					$.ajax({
 						url: '<%= trip_path @trip %>',
 						type: 'put',
+						//data: {'trip' : { 'startdate' : d }}
 						data: { 'name' : 'startdate', 'value' : d }
 					});
 			});
@@ -63,12 +64,12 @@
 			//turn on inline editing for trip name
 			$('#tripname').editable({
 				type: 'text',
-				pk: 1,
 				name: 'tripname',
+				pk: 1,
 				url: '<%= trip_path @trip %>',
 				ajaxOptions: {
 					type: 'put',
-					dataType: 'json'
+					dataType: 'json',
 				},
 				emptytext: "My Awesome Trip"
 			});
@@ -81,115 +82,9 @@
 </div>
 
 <div id="days">
+	
+	<%= render(partial: "shared/day", collection: @trip.days) %>
+	
 
-  <div class='day-card-wrapper'>
-	<div class="day-date-wrapper">
-		<span class="day-date" data-date="" data-elementID='date-1'></span>
-		<span class="fa fa-calendar" id="startDatepicker" ></span>
-	</div>
-			
-	 <div class="card day-card" data-itemnum='1'>
-		<div class="city">
-			<h4 data-elementID="city-1" data-type="text" data-pk="1" data-url="" data-title="City"></h4>
-		</div>
-		<div class="notes">
-			<small><p data-elementID="notes-1" data-type="textarea" data-pk="1" data-url="" data-title="Notes" data-rows='4'>
-			</p></small>
-		</div>
-		<div class="hotel">
-			<p data-elementID="hotel-1" data-type="text" data-pk="1" data-url="" data-title="Hotel">
-				Jaipur Hotel
-			</p>
-		</div>
-	 </div>
-  </div>
-
-  <div class='day-card-wrapper'>
-	  <div class="day-date-wrapper">
-			<span class="day-date" data-date="" data-elementID='date-2'></span>
-	  </div>
-	  <div class="card day-card" data-itemnum='2'>
-		<div class="city">
-			<h4 data-elementID="city-2" data-type="text" data-pk="1" data-url="" data-title="City">
-				Jaipur 2
-			</h4>
-		</div>
-		<div class="notes">
-			<small><p data-elementID="notes-2" data-type="textarea" data-pk="1" data-url="" data-title="Notes" data-rows='4'>
-			</p></small>
-		</div>
-		<div class="hotel">
-			<p data-elementID="hotel-2" data-type="text" data-pk="1" data-url="" data-title="Hotel">
-				Jaipur Hotel
-			</p>
-		</div>
-	  </div>
-  </div>
-
-  <div class='day-card-wrapper'>
-	  <div class="day-date-wrapper">
-			<span class="day-date"data-date="" data-elementID='date-3'></span>
-	  </div>
-	  <div class="card day-card" data-itemnum='3'>
-		<div class="city">
-			<h4 data-elementID="city-3" data-type="text" data-pk="1" data-url="" data-title="City">
-				Bundi
-			</h4>
-		</div>
-		<div class="notes">
-			<small><p data-elementID="notes-3" data-type="textarea" data-pk="1" data-url="" data-title="Notes" data-rows='4'>
-			</p></small>
-		</div>
-		<div class="hotel">
-			<p data-elementID="hotel-3" data-type="text" data-pk="1" data-url="" data-title="Hotel">
-				Bundi Hotel
-			</p>
-		</div>
-	  </div>
-  </div>
-  
-  <div class='day-card-wrapper'>  
-	  <div class="day-date-wrapper">
-			<span class="day-date" data-date="" data-elementID='date-4'></span>
-	  </div>
-	  <div class="card day-card" data-itemnum='4'>
-		<div class="city">
-			<h4 data-elementID="city-4" data-type="text" data-pk="1" data-url="" data-title="City">
-				Bundi
-			</h4>
-		</div>
-		<div class="notes">
-			<small><p data-elementID="notes-4" data-type="textarea" data-pk="1" data-url="" data-title="Notes" data-rows='4'>
-		</p></small></div>
-		<div class="hotel">
-			<p data-elementID="hotel-4" data-type="text" data-pk="1" data-url="" data-title="Hotel">
-				Bundi Hotel
-			</p>
-		</div>
-	  </div>
-  </div>
-
-  <div class='day-card-wrapper'>
-	  <div class="day-date-wrapper">
-			<span class="day-date" data-date="" data-elementID='date-5'></span>
-	  </div>
-	  <div class="card day-card" data-itemnum='5'>
-		<div class="city">
-			<h4 data-elementID="city-5" data-type="text" data-pk="1" data-url="" data-title="City">
-				Udaipur
-			</h4>
-		</div>
-		<div class="notes">
-			<small><p data-elementID="notes-5" data-type="textarea" data-pk="1" data-url="" data-title="Notes" data-rows='4'>
-			</p></small>
-		</div>
-		<div class="hotel">
-			<p data-elementID="hotel-5" data-type="text" data-pk="1" data-url="" data-title="Hotel">
-				Udaipur Hotel
-			</p>
-		</div>
-	  </div>
-	</div>
-  </div>
   <button id="addDayButton" class='btn btn-info btn-lg'>Add Day</button>
 

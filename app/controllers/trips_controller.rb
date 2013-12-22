@@ -8,6 +8,7 @@ class TripsController < ApplicationController
   
   def show
     @trip = Trip.find(params[:id])
+    session[:trip_id] = @trip.id
   end
   
   def update
@@ -21,5 +22,7 @@ class TripsController < ApplicationController
       end
     end
   end
+  
+  private
   
 end

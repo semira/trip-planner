@@ -1,15 +1,28 @@
-class TripsController < ApplicationController
+class DaysController < ApplicationController
+  include CurrentTrip
+  before_action :set_trip, only: [:update]
+  
   def create
+    @day = @trip.days.build(params[:day])
+
+    respond_to do |format|
+      if @day.save
+        format.json { render json: @day }
+      else
+        format.json { render json: @day.errors, status: :unprocessable_entity }
+      end
+    end
   end
   
   def update
-    @trip = Trip.find(params[:id])
-    respond_to do |format| 
-      if @trip.update_attribute(params[:name], params[:value])
-        @fieldname = params[:name]
-        format.json { render json: @trip.as_json }
+    @day = @trip.days.find(params[:pk])
+    @day.update_column(params[:name], params[:value]) 
+    puts @day.city
+    respond_to do |format|
+      if @day.save       
+        format.json { render json: @day.as_json }
       else
-        format.json { render head :no_content} #TO DO - do something real here
+        format.json { render json: @day.errors, status: :unprocessable_entity }
       end
     end
   end
