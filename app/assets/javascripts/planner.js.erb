@@ -42,10 +42,32 @@ function enableInlineEditingForAllDays() {
 	for (var i=1; i <= numDays(); i++) {
 		enableInlineEditingForOneDay(i);
 	}
+	
+	$.each($('.day-card'), function(i, element)
+	{
+		alert($(element).attr('data-itemnum'));
+		enableInlineEditingForOneDay($(element).attr('data-itemnum'));
+	});
+	
 }
 
 //turns on inline editing for all details of a day card, for the given dayNum
 function enableInlineEditingForOneDay(dayNum) {
+	/*day = $('[data-dayID=' + dayNum + ']');
+	day.children('.city').editable({
+		type: 'text',
+		name: 'city',
+		pk: dayNum,
+		url: '/days/1',
+		ajaxOptions: {
+			type: 'put',
+			dataType: 'json',
+		},
+		emptytext: 'City', 
+		emptyclass: 'text-muted', 
+		highlight: '#2B715C'
+	});*/
+	
 	$('[data-elementID=city' + '-' + dayNum + ']').editable({
 		type: 'text',
 		name: 'city',

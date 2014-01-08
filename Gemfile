@@ -33,6 +33,9 @@ gem 'font-awesome-rails'
 gem 'bootstrap-datepicker-rails'
 gem 'momentjs-rails'
 
+# Used for ordering the list of days in a trip
+gem 'acts_as_list'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 

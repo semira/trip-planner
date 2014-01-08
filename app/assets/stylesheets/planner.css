@@ -22,7 +22,7 @@
 	 cursor: pointer;
 }
 
-.hotel {
+.hotel-wrapper {
 	color: #fff;
 	text-shadow: #000 0 1px;
 	box-shadow: 5px;
@@ -57,15 +57,15 @@
 	cursor: pointer;
 }
 
-.city h4 {
+.city-wrapper h4 {
 	padding-top: 10px !important;
 }
 
-.hotel p {
+.hotel-wrapper p {
 	margin-top: 13px;
 }
 
-.notes {
+.notes-wrapper {
 	text-align: left;
 	padding: 3px 5px;
 	line-height: 14px;
@@ -100,7 +100,7 @@
 	border-bottom: none !important;
 }
 
-div.city .text-muted, div.hotel .text-muted {
+div.city-wrapper .text-muted, div.hotel-wrapper .text-muted {
 	text-shadow: none;
 	color: #2B715C;
 }
