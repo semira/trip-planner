@@ -65,7 +65,7 @@
 			$('#tripname').editable({
 				type: 'text',
 				name: 'tripname',
-				pk: 1,
+				pk: <%= @trip.id %>,
 				url: '<%= trip_path @trip %>',
 				ajaxOptions: {
 					type: 'put',
