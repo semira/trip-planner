@@ -25,7 +25,7 @@ function addDayCard() {
 //			$('#dayModal').modal('show');
 //		})
 	    .appendTo($(w));
-	enableInlineEditingForOneDay(newDayCount);
+	enableInlineEditingForOneDay_old(newDayCount);
 	return d;
 }
 
@@ -39,20 +39,17 @@ function enableInlineEditing(elementName, numElements, editableOptions) {
 
 //turns on inline editing for all details of a day card, for all day cards in a trip
 function enableInlineEditingForAllDays() {
-	/*for (var i=1; i <= numDays(); i++) {
-		enableInlineEditingForOneDay(i);
-	}*/
 	
 	$.each($('.day-card'), function(i, element)
 	{
-		enableInlineEditingForOneDay_new($(element));
+		enableInlineEditingForOneDay($(element));
 	});
 	
 }
 
-//turns on inline editing for all details of a day card, for the given day record
-//param is day's db record id
-function enableInlineEditingForOneDay_new(dayCard) {
+//turns on inline editing for all details of a day card
+//param dayCard is the document element of the dayCard div
+function enableInlineEditingForOneDay(dayCard) {
 	dayID = $(dayCard).attr('data-dayID');
 	$(dayCard).find('.city').editable({
 		type: 'text',
@@ -95,23 +92,10 @@ function enableInlineEditingForOneDay_new(dayCard) {
 	});
 }
 
+//deprecated
 //turns on inline editing for all details of a day card, for the given day record
 //param is day's db record id
-function enableInlineEditingForOneDay(dayNum) {
-	/*day = $('[data-dayID=' + dayNum + ']');
-	day.children('.city').editable({
-		type: 'text',
-		name: 'city',
-		pk: dayNum,
-		url: '/days/1',
-		ajaxOptions: {
-			type: 'put',
-			dataType: 'json',
-		},
-		emptytext: 'City', 
-		emptyclass: 'text-muted', 
-		highlight: '#2B715C'
-	});*/
+function enableInlineEditingForOneDay_day(dayNum) {
 	
 	$('[data-elementID=city' + '-' + dayNum + ']').editable({
 		type: 'text',
