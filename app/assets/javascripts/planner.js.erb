@@ -39,18 +39,64 @@ function enableInlineEditing(elementName, numElements, editableOptions) {
 
 //turns on inline editing for all details of a day card, for all day cards in a trip
 function enableInlineEditingForAllDays() {
-	for (var i=1; i <= numDays(); i++) {
+	/*for (var i=1; i <= numDays(); i++) {
 		enableInlineEditingForOneDay(i);
-	}
+	}*/
 	
 	$.each($('.day-card'), function(i, element)
 	{
-		enableInlineEditingForOneDay($(element).attr('data-itemnum'));
+		enableInlineEditingForOneDay_new($(element));
 	});
 	
 }
 
-//turns on inline editing for all details of a day card, for the given dayNum
+//turns on inline editing for all details of a day card, for the given day record
+//param is day's db record id
+function enableInlineEditingForOneDay_new(dayCard) {
+	dayID = $(dayCard).attr('data-dayID');
+	$(dayCard).find('.city').editable({
+		type: 'text',
+		name: 'city',
+		pk: dayID,
+		url: '/days/' + dayID,
+		ajaxOptions: {
+			type: 'put',
+			dataType: 'json',
+		},
+		emptytext: 'City', 
+		emptyclass: 'text-muted', 
+		highlight: '#2B715C'
+	});
+	$(dayCard).find('.notes').editable({
+		type: 'textarea',
+		name: 'notes',
+		pk: dayID,
+		url: '/days/' + dayID,
+		ajaxOptions: {
+			type: 'put',
+			dataType: 'json',
+		},
+		emptytext: '<span class="fa fa-plus-square"></span> Add things to see & do', 
+		emptyclass: 'text-muted', 
+		highlight: '#2B715C'
+	});
+	$(dayCard).find('.hotel').editable({
+		type: 'text',
+		name: 'hotel',
+		pk: dayID,
+		url: '/days/' + dayID,
+		ajaxOptions: {
+			type: 'put',
+			dataType: 'json',
+		},
+		emptytext: 'Hotel', 
+		emptyclass: 'text-muted', 
+		highlight: '#2B715C'
+	});
+}
+
+//turns on inline editing for all details of a day card, for the given day record
+//param is day's db record id
 function enableInlineEditingForOneDay(dayNum) {
 	/*day = $('[data-dayID=' + dayNum + ']');
 	day.children('.city').editable({
