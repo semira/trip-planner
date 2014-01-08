@@ -1,9 +1,9 @@
 class DaysController < ApplicationController
   include CurrentTrip
-  before_action :set_trip, only: [:update]
+  before_action :set_trip, only: [:create, :update]
   
   def create
-    @day = @trip.days.build(params[:day])
+    @day = @trip.days.create()
 
     respond_to do |format|
       if @day.save

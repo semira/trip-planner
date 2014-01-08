@@ -35,7 +35,15 @@
 			//creates a new day column upon click of Add Day button
 			$('#addDayButton')
 				.click(function() {
- 					var d = addDayCard();
+					$.ajax({
+						url: '<%= days_path %>',
+						type: 'post',
+						//data: {'trip' : { 'startdate' : d }}
+						//data: { 'name' : 'startdate', 'value' : d }
+						success: function(data, textStatus, jqXHR) {
+							var d = addDayCard(data.id);
+						}
+					});
 			});
 			
 			//initiates the datepicker above the first card for the start date
