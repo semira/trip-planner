@@ -45,7 +45,6 @@ function enableInlineEditingForAllDays() {
 	
 	$.each($('.day-card'), function(i, element)
 	{
-		alert($(element).attr('data-itemnum'));
 		enableInlineEditingForOneDay($(element).attr('data-itemnum'));
 	});
 	
