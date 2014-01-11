@@ -1,5 +1,6 @@
 <h3>My Trips (<%= @trips.count %>)</h3>
 <% @trips.each do |trip| %>
-	<p><%= trip.id %> <%= link_to trip.tripname, trip_path(trip) %></p>
+	<p><%= link_to trip.tripname, trip_path(trip) %></p>
 <% end %>
+<p><%= link_to "Plan a new Awesome Trip!", trips_path, :method => 'post' %></p>
 

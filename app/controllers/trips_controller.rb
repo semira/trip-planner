@@ -3,7 +3,9 @@ class TripsController < ApplicationController
     @trips = Trip.all
   end 
   
-  def new
+  def create
+    @trip=Trip.create(params[:trip])
+    redirect_to trip_path @trip
   end
   
   def show

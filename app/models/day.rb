@@ -2,5 +2,10 @@
 class Day < ActiveRecord::Base
   
   belongs_to :trip
-  acts_as_list scope: :trip  
+  acts_as_list scope: :trip
+  after_create :move_to_end_of_trip
+  
+  def move_to_end_of_trip
+    self.move_to_bottom
+  end  
 end
