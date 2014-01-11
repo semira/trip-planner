@@ -1,13 +1,5 @@
-
-// returns the number of day cards currently in the trip
-function numDays () {
-	return parseInt($('#days .day-card').last().data('itemnum'));
-}
-
 //adds a day card to the end of the list of day cards with placeholder text 
-function addDayCard(dayID) {
-	var newDayCount = numDays()+1;
-	
+function addDayCard(dayID) {	
 	w=document.createElement('div');
 	
 	$(w).addClass('day-card-wrapper')

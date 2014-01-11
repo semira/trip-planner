@@ -1,5 +1,12 @@
 <% content_for :script do %>	
 	<script>
+
+		// returns the number of day cards currently in the trip
+		function numDays () {
+			//return parseInt($('#days .day-card').last().data('itemnum'));
+			return <%= @trip.days.count %>;
+		}
+		
 		$(document).ready(function() {
 			var startDate = '<%= @trip.startdate %>'; //keeps track of the trip startDate when day cards get reordered
 			//enables day card reordering via drag and drop, and reorders dates as needed
