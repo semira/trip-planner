@@ -3,7 +3,7 @@
 	float: left;
 	height: 275px;
 	text-align: center;
-	margin-top: 10px;
+	margin: 0px 0px 20px 0px;
 }
 
 .card {
@@ -72,7 +72,7 @@
 }
 
 #addDayButton {
-	margin-top: 40px;
+	margin-top: 30px;
 	width: 175px !important;
 	background-color: #A6623E !important;
 	border: none !important;
@@ -103,4 +103,8 @@
 div.city-wrapper .text-muted, div.hotel-wrapper .text-muted {
 	text-shadow: none;
 	color: #2B715C;
+}
+
+.card .close {
+	font-size: 16px;
 }

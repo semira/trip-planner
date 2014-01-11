@@ -107,13 +107,12 @@
 <% end %>
 
 <div>
-	<h5 id="tripname"><%= @trip.tripname %></h5>
+	<h4 id="tripname"><%= @trip.tripname %></h4>
 </div>
 
 <div id="days">
 	
 	<%= render(partial: "shared/day", collection: @trip.days) %>
+	<button id="addDayButton" class='btn btn-info btn-lg'>Add Day</button>
 	
-
-  <button id="addDayButton" class='btn btn-info btn-lg'>Add Day</button>
-
+</div>
