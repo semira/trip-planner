@@ -12,6 +12,7 @@
 			//enables day card reordering via drag and drop, and reorders dates as needed
 			$(function() {
 			    $( "#days" ).sortable({
+				  items: '.day-card-wrapper',
 				  start: function( event, ui ) {
 					// remember original startdate before sort in case first day gets reordered
 					startDate = getCurrentStartDate();
@@ -23,6 +24,19 @@
 						
 						//reset the startDate variable so an outdated one never gets used
 						startDate = null; 
+						
+						//update position in db
+						var sortedIDs = $( "#days" ).sortable( "toArray", 'data-dayID' );
+						var newPos = sortedIDs.indexOf(ui.item.attr('id'))+1;
+						var dayID = ui.item.attr('data-dayID');
+						//send newPos to server
+						$.ajax({
+							url: '<%= update_position_path %>',
+							type: 'post',
+							//data: {'trip' : { 'startdate' : d }}
+							data: { 'pk' : dayID, 'newPos' : newPos},
+						});
+						
 					} 
 					else {
 						// in this case, startDate var isn't set, so make sure nothing appears in date fields

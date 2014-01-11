@@ -13,6 +13,7 @@ Wikigps::Application.routes.draw do
 
   resources :trips
   resources :days
+  post 'days/update_position' => 'days#update_position', as: :update_position
 
   # Example resource route with options:
   #   resources :products do

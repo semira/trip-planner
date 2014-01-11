@@ -25,7 +25,7 @@ function addDayCard(dayID) {
 //turns on inline editing for all details of a day card, for all day cards in a trip
 function enableInlineEditingForAllDays() {
 	
-	$.each($('.day-card'), function(i, element)
+	$.each($('.day-card-wrapper'), function(i, element)
 	{
 		enableInlineEditingForOneDay($(element));
 	});

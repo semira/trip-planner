@@ -1,21 +1,21 @@
-<div class='day-card-wrapper'>
+<div class='day-card-wrapper' id='day_<%= day.id %>' data-dayID='<%= day.id %>'>
 	  <div class="day-date-wrapper">
-			<span class="day-date" data-date="" data-elementID='date-1'></span>
+			<span class="day-date" data-date=""></span>
 			<% if day_counter == 0 %>
 				<span class="fa fa-calendar" id="startDatepicker" ></span>
 			<% end %>
 	  </div>
-	  <div class="card day-card" data-itemnum='<%= day.id %>' data-dayID='<%= day.id %>'>
+	  <div class="card day-card">
 		<div class="city-wrapper">
-			<h4 class="city" data-elementID="city-1"><%= day.city %></h4>
+			<h4 class="city"><%= day.city %></h4>
 		</div>
 		<div class="notes-wrapper">
-			<small><p class="notes" data-elementID="notes-1" data-rows='4'>
+			<small><p class="notes" data-rows='4'>
 				<%= day.notes %>
 			</p></small>
 		</div>
 		<div class="hotel-wrapper">
-			<p class="hotel" data-elementID="hotel-1"><%= day.hotel %></p>
+			<p class="hotel"><%= day.hotel %></p>
 		</div>
 	  </div>
 </div>
