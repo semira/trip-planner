@@ -102,6 +102,25 @@
 				},
 				emptytext: "My Awesome Trip"
 			});
+			
+			//turn on listener for delete day card
+			$('.card .close')
+				.click(function() {
+					var dayID = $(this).parents('.day-card-wrapper').attr('data-dayID');
+					$.ajax({
+						url: '<%= day_path %>',
+						type: 'delete',
+						dataType: 'json',
+						//data: {'trip' : { 'startdate' : d }}
+						data: { 'pk' : dayID },
+						success: function(data, textStatus, jqXHR) {
+							//removeDay();
+							alert('success');
+						}
+					//alert($(this).parents('.day-card-wrapper').attr('data-dayID'));
+				});
+			});
+			
 		});
 	</script>
 <% end %>
