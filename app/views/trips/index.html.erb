@@ -1,6 +1,8 @@
 <h3>My Trips (<%= @trips.count %>)</h3>
 <% @trips.each do |trip| %>
-	<p><%= link_to trip.tripname, trip_path(trip) %></p>
+	<p><h5><%= link_to trip.tripname, trip_path(trip) %>
+		<small>[<%= link_to 'Delete', trip, method: :delete, data: { confirm: 'Are you sure?' } %>]</small></h5>
+	</p>
 <% end %>
 <button><%= link_to "Create a new Awesome Trip Plan", trips_path, :method => :post %></button>
 

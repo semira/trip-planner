@@ -1,4 +1,6 @@
 class TripsController < ApplicationController
+  before_action :set_trip, only: [:show, :update, :destroy]
+  
   def index
     @trips = Trip.all
   end 
@@ -9,12 +11,10 @@ class TripsController < ApplicationController
   end
   
   def show
-    @trip = Trip.find(params[:id])
     session[:trip_id] = @trip.id
   end
   
   def update
-    @trip = Trip.find(params[:id])
     respond_to do |format| 
       if @trip.update_attribute(params[:name], params[:value])
         @fieldname = params[:name]
@@ -25,6 +25,17 @@ class TripsController < ApplicationController
     end
   end
   
+  def destroy
+    @trip.destroy
+    respond_to do |format|
+      format.html { redirect_to trips_url }
+      format.json { head :no_content }
+    end
+  end
+  
   private
   
+  def set_trip
+    @trip = Trip.find(params[:id])
+  end
 end
