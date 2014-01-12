@@ -106,7 +106,8 @@
 			//turn on listener for delete day card
 			$('.card .close')
 				.click(function() {
-					var dayID = $(this).parents('.day-card-wrapper').attr('data-dayID');
+					var dayCard =$(this).parents('.day-card-wrapper'); 
+					var dayID = $(dayCard).attr('data-dayID');
 					$.ajax({
 						url: '<%= day_path %>',
 						type: 'delete',
@@ -115,7 +116,7 @@
 						data: { 'pk' : dayID },
 						success: function(data, textStatus, jqXHR) {
 							//removeDay();
-							alert('success');
+							$(dayCard).detach(); 
 						}
 					//alert($(this).parents('.day-card-wrapper').attr('data-dayID'));
 				});
