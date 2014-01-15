@@ -106,10 +106,16 @@
 				url: '<%= trip_path @trip %>',
 				ajaxOptions: {
 					type: 'put',
-					dataType: 'json',
+					dataType: 'json'
 				},
 				emptytext: "My Awesome Trip"
-			});
+			})
+				.on('hidden', function() {
+					$('.edit-tripname').show();
+				})
+				.on('shown', function() {
+					$('.edit-tripname').hide();					
+				});
 			
 			//turn on listener for delete day card
 			$('.card .close')
@@ -129,13 +135,16 @@
 					//alert($(this).parents('.day-card-wrapper').attr('data-dayID'));
 				});
 			});
-			
+			$('.edit-tripname').click(function(e){    
+			       e.stopPropagation();
+			       $('#tripname').editable('toggle');
+			});
 		});
 	</script>
 <% end %>
 
-<div>
-	<h4 id="tripname"><%= @trip.tripname %></h4>
+<div class="tripname-wrapper">
+	<h4 id="tripname"><%= @trip.tripname %></h4><i class="edit-tripname fa fa-pencil-square"></i>
 </div>
 
 <div id="days">

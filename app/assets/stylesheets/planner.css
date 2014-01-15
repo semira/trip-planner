@@ -78,9 +78,19 @@
 	border: none !important;
 }
 
+.tripname-wrapper {
+	margin: 10px 0px;
+}
+
 #tripname {
 	cursor: pointer;
-	margin-left: 5px;
+	margin: 0px 4px 0px 5px;
+	display: inline;
+}
+
+.edit-tripname {
+	opacity: 0.2;
+	cursor: pointer;
 }
 
 /* overrides to bootstrap-editable.css */
