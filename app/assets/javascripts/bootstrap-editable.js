@@ -4576,7 +4576,7 @@ Editableform based on Twitter Bootstrap 3
         'Save'+
       '</button>'+
       '<button type="button" class="btn btn-default btn-xs editable-cancel">'+
-        '<i class="fa fa-times"></i>'+
+        'Cancel'+
       '</button>';         
     
     //error classes
