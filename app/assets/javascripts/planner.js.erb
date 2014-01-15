@@ -11,7 +11,8 @@ function addDayCard(dayID) {
 		
 	d=document.createElement('div');
 	$(d).addClass('card day-card')
-	    .html("<div class='city-wrapper'><h4 class='city'></h4></div>"
+	    .html("<i class='fa fa-times-circle close'></i>"
+				+ "<div class='city-wrapper'><h4 class='city'></h4></div>"
 				+ "<div class='notes-wrapper'><small><p class='notes' data-rows='4'></p></small></div>"
 				+ "<div class='hotel-wrapper'><p class='hotel'></p></div>")
 		.attr("data-itemnum", dayID)

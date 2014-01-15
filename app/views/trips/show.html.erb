@@ -109,13 +109,19 @@
 					dataType: 'json'
 				},
 				emptytext: "My Awesome Trip"
-			})
+				})
 				.on('hidden', function() {
 					$('.edit-tripname').show();
 				})
 				.on('shown', function() {
 					$('.edit-tripname').hide();					
 				});
+				
+			//pencil icon triggers  inline editing for trip name
+			$('.edit-tripname').click(function(e){    
+			       e.stopPropagation();
+			       $('#tripname').editable('toggle');
+			});
 			
 			//turn on listener for delete day card
 			$('.card .close')
@@ -123,7 +129,7 @@
 					var dayCard =$(this).parents('.day-card-wrapper'); 
 					var dayID = $(dayCard).attr('data-dayID');
 					$.ajax({
-						url: '<%= day_path %>',
+						url: '<%= day_path %>', //days/id
 						type: 'delete',
 						dataType: 'json',
 						//data: {'trip' : { 'startdate' : d }}
@@ -132,13 +138,9 @@
 							//removeDay();
 							$(dayCard).detach(); 
 						}
-					//alert($(this).parents('.day-card-wrapper').attr('data-dayID'));
 				});
 			});
-			$('.edit-tripname').click(function(e){    
-			       e.stopPropagation();
-			       $('#tripname').editable('toggle');
-			});
+
 		});
 	</script>
 <% end %>
