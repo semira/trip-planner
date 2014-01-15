@@ -6516,7 +6516,7 @@ Automatically shown in inline mode.
 			this.picker.addClass('datetimepicker-rtl');
 			if (this.bootcssVer == 3) {
 				this.picker.find('.prev span, .next span')
-					.toggleClass('glyphicon-arrow-left glyphicon-arrow-right');
+					.toggleClass('icon-arrow-left icon-arrow-right'); //semira change
 			} else {
 				this.picker.find('.prev i, .next i')
 					.toggleClass('icon-arrow-left icon-arrow-right');
@@ -7930,9 +7930,9 @@ Automatically shown in inline mode.
 		},
 		headTemplate:     '<thead>' +
 							  '<tr>' +
-							  '<th class="prev"><i class="icon-arrow-left"/></th>' +
+							  '<th class="prev"><i class="icon-arrow-left fa fa-caret-left"/></th>' +
 							  '<th colspan="5" class="switch"></th>' +
-							  '<th class="next"><i class="icon-arrow-right"/></th>' +
+							  '<th class="next"><i class="icon-arrow-right fa fa-caret-right"/></th>' +
 							  '</tr>' +
 			'</thead>',
 		headTemplateV3:   '<thead>' +
