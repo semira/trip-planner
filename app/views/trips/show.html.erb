@@ -67,12 +67,21 @@
 					});
 			});
 			
+			updateDates(startDate); //load and set existing dates
+			
 			//initiates the datepicker above the first card for the start date
 			//when user changes trip start date, dates for all days in the trip get updated
-			$('#startDatepicker').datepicker()
+			//$('#startDatepicker').datepicker('setDate', new Date(startDate));
+			//$('#startDatepicker').datepicker('update')
+			$('#startDatepicker').datetimepicker({ 
+				autoclose : true,
+				minView : 'month',
+				maxView : 'month',
+				todayBtn : 'linked',
+				initialDate : startDate ? new Date(startDate) : new Date()
+			})
 				.on('changeDate', function(ev) {
 					var d = new Date(ev.date);
-					$('#startDatepicker').datepicker('hide');
 					updateDates(d);
 					//send request to update startdate of trip
 					$.ajax({
@@ -82,7 +91,6 @@
 						data: { 'name' : 'startdate', 'value' : d }
 					});
 			});
-			updateDates(startDate); //load and set existing dates
 				
 			//turn editability to inline mode
 			$.fn.editable.defaults.mode = 'inline';

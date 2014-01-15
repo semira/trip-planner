@@ -30,7 +30,7 @@ gem 'jquery-ui-rails'
 #gem "twitter-bootstrap-rails"
 gem 'font-awesome-rails'
 #gem 'bootstrap-x-editable-rails'
-gem 'bootstrap-datepicker-rails'
+#gem 'bootstrap-datepicker-rails'
 gem 'momentjs-rails'
 
 # Used for ordering the list of days in a trip
